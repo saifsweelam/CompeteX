@@ -134,6 +134,15 @@ exports.Prisma.TeamScalarFieldEnum = {
   score: 'score'
 };
 
+exports.Prisma.TeamMemberScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  teamId: 'teamId'
+};
+
 exports.Prisma.ChallengeScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -144,7 +153,7 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   competitionId: 'competitionId'
 };
 
-exports.Prisma.ConstraintScalarFieldEnum = {
+exports.Prisma.CriterionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
@@ -182,8 +191,9 @@ exports.SubmissionStatus = exports.$Enums.SubmissionStatus = {
 exports.Prisma.ModelName = {
   Competition: 'Competition',
   Team: 'Team',
+  TeamMember: 'TeamMember',
   Challenge: 'Challenge',
-  Constraint: 'Constraint',
+  Criterion: 'Criterion',
   Submission: 'Submission'
 };
 

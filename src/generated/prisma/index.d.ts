@@ -24,15 +24,20 @@ export type Competition = $Result.DefaultSelection<Prisma.$CompetitionPayload>
  */
 export type Team = $Result.DefaultSelection<Prisma.$TeamPayload>
 /**
+ * Model TeamMember
+ * 
+ */
+export type TeamMember = $Result.DefaultSelection<Prisma.$TeamMemberPayload>
+/**
  * Model Challenge
  * 
  */
 export type Challenge = $Result.DefaultSelection<Prisma.$ChallengePayload>
 /**
- * Model Constraint
+ * Model Criterion
  * 
  */
-export type Constraint = $Result.DefaultSelection<Prisma.$ConstraintPayload>
+export type Criterion = $Result.DefaultSelection<Prisma.$CriterionPayload>
 /**
  * Model Submission
  * 
@@ -202,6 +207,16 @@ export class PrismaClient<
   get team(): Prisma.TeamDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.teamMember`: Exposes CRUD operations for the **TeamMember** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TeamMembers
+    * const teamMembers = await prisma.teamMember.findMany()
+    * ```
+    */
+  get teamMember(): Prisma.TeamMemberDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.challenge`: Exposes CRUD operations for the **Challenge** model.
     * Example usage:
     * ```ts
@@ -212,14 +227,14 @@ export class PrismaClient<
   get challenge(): Prisma.ChallengeDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.constraint`: Exposes CRUD operations for the **Constraint** model.
+   * `prisma.criterion`: Exposes CRUD operations for the **Criterion** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Constraints
-    * const constraints = await prisma.constraint.findMany()
+    * // Fetch zero or more Criteria
+    * const criteria = await prisma.criterion.findMany()
     * ```
     */
-  get constraint(): Prisma.ConstraintDelegate<ExtArgs, ClientOptions>;
+  get criterion(): Prisma.CriterionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.submission`: Exposes CRUD operations for the **Submission** model.
@@ -672,8 +687,9 @@ export namespace Prisma {
   export const ModelName: {
     Competition: 'Competition',
     Team: 'Team',
+    TeamMember: 'TeamMember',
     Challenge: 'Challenge',
-    Constraint: 'Constraint',
+    Criterion: 'Criterion',
     Submission: 'Submission'
   };
 
@@ -693,7 +709,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "competition" | "team" | "challenge" | "constraint" | "submission"
+      modelProps: "competition" | "team" | "teamMember" | "challenge" | "criterion" | "submission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -845,6 +861,80 @@ export namespace Prisma {
           }
         }
       }
+      TeamMember: {
+        payload: Prisma.$TeamMemberPayload<ExtArgs>
+        fields: Prisma.TeamMemberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TeamMemberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TeamMemberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          findFirst: {
+            args: Prisma.TeamMemberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TeamMemberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          findMany: {
+            args: Prisma.TeamMemberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>[]
+          }
+          create: {
+            args: Prisma.TeamMemberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          createMany: {
+            args: Prisma.TeamMemberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TeamMemberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>[]
+          }
+          delete: {
+            args: Prisma.TeamMemberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          update: {
+            args: Prisma.TeamMemberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          deleteMany: {
+            args: Prisma.TeamMemberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TeamMemberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TeamMemberUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>[]
+          }
+          upsert: {
+            args: Prisma.TeamMemberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeamMemberPayload>
+          }
+          aggregate: {
+            args: Prisma.TeamMemberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTeamMember>
+          }
+          groupBy: {
+            args: Prisma.TeamMemberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TeamMemberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TeamMemberCountArgs<ExtArgs>
+            result: $Utils.Optional<TeamMemberCountAggregateOutputType> | number
+          }
+        }
+      }
       Challenge: {
         payload: Prisma.$ChallengePayload<ExtArgs>
         fields: Prisma.ChallengeFieldRefs
@@ -919,77 +1009,77 @@ export namespace Prisma {
           }
         }
       }
-      Constraint: {
-        payload: Prisma.$ConstraintPayload<ExtArgs>
-        fields: Prisma.ConstraintFieldRefs
+      Criterion: {
+        payload: Prisma.$CriterionPayload<ExtArgs>
+        fields: Prisma.CriterionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ConstraintFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload> | null
+            args: Prisma.CriterionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ConstraintFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           findFirst: {
-            args: Prisma.ConstraintFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload> | null
+            args: Prisma.CriterionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ConstraintFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           findMany: {
-            args: Prisma.ConstraintFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>[]
+            args: Prisma.CriterionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>[]
           }
           create: {
-            args: Prisma.ConstraintCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           createMany: {
-            args: Prisma.ConstraintCreateManyArgs<ExtArgs>
+            args: Prisma.CriterionCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ConstraintCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>[]
+            args: Prisma.CriterionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>[]
           }
           delete: {
-            args: Prisma.ConstraintDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           update: {
-            args: Prisma.ConstraintUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           deleteMany: {
-            args: Prisma.ConstraintDeleteManyArgs<ExtArgs>
+            args: Prisma.CriterionDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ConstraintUpdateManyArgs<ExtArgs>
+            args: Prisma.CriterionUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ConstraintUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>[]
+            args: Prisma.CriterionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>[]
           }
           upsert: {
-            args: Prisma.ConstraintUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConstraintPayload>
+            args: Prisma.CriterionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CriterionPayload>
           }
           aggregate: {
-            args: Prisma.ConstraintAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateConstraint>
+            args: Prisma.CriterionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCriterion>
           }
           groupBy: {
-            args: Prisma.ConstraintGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ConstraintGroupByOutputType>[]
+            args: Prisma.CriterionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CriterionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ConstraintCountArgs<ExtArgs>
-            result: $Utils.Optional<ConstraintCountAggregateOutputType> | number
+            args: Prisma.CriterionCountArgs<ExtArgs>
+            result: $Utils.Optional<CriterionCountAggregateOutputType> | number
           }
         }
       }
@@ -1153,8 +1243,9 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     competition?: CompetitionOmit
     team?: TeamOmit
+    teamMember?: TeamMemberOmit
     challenge?: ChallengeOmit
-    constraint?: ConstraintOmit
+    criterion?: CriterionOmit
     submission?: SubmissionOmit
   }
 
@@ -1291,10 +1382,12 @@ export namespace Prisma {
 
   export type TeamCountOutputType = {
     submissions: number
+    members: number
   }
 
   export type TeamCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submissions?: boolean | TeamCountOutputTypeCountSubmissionsArgs
+    members?: boolean | TeamCountOutputTypeCountMembersArgs
   }
 
   // Custom InputTypes
@@ -1315,18 +1408,25 @@ export namespace Prisma {
     where?: SubmissionWhereInput
   }
 
+  /**
+   * TeamCountOutputType without action
+   */
+  export type TeamCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeamMemberWhereInput
+  }
+
 
   /**
    * Count Type ChallengeCountOutputType
    */
 
   export type ChallengeCountOutputType = {
-    constraints: number
+    criteria: number
     submissions: number
   }
 
   export type ChallengeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    constraints?: boolean | ChallengeCountOutputTypeCountConstraintsArgs
+    criteria?: boolean | ChallengeCountOutputTypeCountCriteriaArgs
     submissions?: boolean | ChallengeCountOutputTypeCountSubmissionsArgs
   }
 
@@ -1344,8 +1444,8 @@ export namespace Prisma {
   /**
    * ChallengeCountOutputType without action
    */
-  export type ChallengeCountOutputTypeCountConstraintsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConstraintWhereInput
+  export type ChallengeCountOutputTypeCountCriteriaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CriterionWhereInput
   }
 
   /**
@@ -2740,6 +2840,7 @@ export namespace Prisma {
     score?: boolean
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     submissions?: boolean | Team$submissionsArgs<ExtArgs>
+    members?: boolean | Team$membersArgs<ExtArgs>
     _count?: boolean | TeamCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["team"]>
 
@@ -2779,6 +2880,7 @@ export namespace Prisma {
   export type TeamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     submissions?: boolean | Team$submissionsArgs<ExtArgs>
+    members?: boolean | Team$membersArgs<ExtArgs>
     _count?: boolean | TeamCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeamIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2793,6 +2895,7 @@ export namespace Prisma {
     objects: {
       competition: Prisma.$CompetitionPayload<ExtArgs>
       submissions: Prisma.$SubmissionPayload<ExtArgs>[]
+      members: Prisma.$TeamMemberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3198,6 +3301,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     competition<T extends CompetitionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionDefaultArgs<ExtArgs>>): Prisma__CompetitionClient<$Result.GetResult<Prisma.$CompetitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     submissions<T extends Team$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Team$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    members<T extends Team$membersArgs<ExtArgs> = {}>(args?: Subset<T, Team$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3652,6 +3756,30 @@ export namespace Prisma {
   }
 
   /**
+   * Team.members
+   */
+  export type Team$membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    where?: TeamMemberWhereInput
+    orderBy?: TeamMemberOrderByWithRelationInput | TeamMemberOrderByWithRelationInput[]
+    cursor?: TeamMemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TeamMemberScalarFieldEnum | TeamMemberScalarFieldEnum[]
+  }
+
+  /**
    * Team without action
    */
   export type TeamDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3667,6 +3795,1113 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TeamInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TeamMember
+   */
+
+  export type AggregateTeamMember = {
+    _count: TeamMemberCountAggregateOutputType | null
+    _avg: TeamMemberAvgAggregateOutputType | null
+    _sum: TeamMemberSumAggregateOutputType | null
+    _min: TeamMemberMinAggregateOutputType | null
+    _max: TeamMemberMaxAggregateOutputType | null
+  }
+
+  export type TeamMemberAvgAggregateOutputType = {
+    id: number | null
+    teamId: number | null
+  }
+
+  export type TeamMemberSumAggregateOutputType = {
+    id: number | null
+    teamId: number | null
+  }
+
+  export type TeamMemberMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    teamId: number | null
+  }
+
+  export type TeamMemberMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    teamId: number | null
+  }
+
+  export type TeamMemberCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    createdAt: number
+    updatedAt: number
+    teamId: number
+    _all: number
+  }
+
+
+  export type TeamMemberAvgAggregateInputType = {
+    id?: true
+    teamId?: true
+  }
+
+  export type TeamMemberSumAggregateInputType = {
+    id?: true
+    teamId?: true
+  }
+
+  export type TeamMemberMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    teamId?: true
+  }
+
+  export type TeamMemberMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    teamId?: true
+  }
+
+  export type TeamMemberCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    teamId?: true
+    _all?: true
+  }
+
+  export type TeamMemberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeamMember to aggregate.
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeamMembers to fetch.
+     */
+    orderBy?: TeamMemberOrderByWithRelationInput | TeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TeamMembers
+    **/
+    _count?: true | TeamMemberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TeamMemberAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TeamMemberSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TeamMemberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TeamMemberMaxAggregateInputType
+  }
+
+  export type GetTeamMemberAggregateType<T extends TeamMemberAggregateArgs> = {
+        [P in keyof T & keyof AggregateTeamMember]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTeamMember[P]>
+      : GetScalarType<T[P], AggregateTeamMember[P]>
+  }
+
+
+
+
+  export type TeamMemberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeamMemberWhereInput
+    orderBy?: TeamMemberOrderByWithAggregationInput | TeamMemberOrderByWithAggregationInput[]
+    by: TeamMemberScalarFieldEnum[] | TeamMemberScalarFieldEnum
+    having?: TeamMemberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TeamMemberCountAggregateInputType | true
+    _avg?: TeamMemberAvgAggregateInputType
+    _sum?: TeamMemberSumAggregateInputType
+    _min?: TeamMemberMinAggregateInputType
+    _max?: TeamMemberMaxAggregateInputType
+  }
+
+  export type TeamMemberGroupByOutputType = {
+    id: number
+    name: string
+    email: string
+    createdAt: Date
+    updatedAt: Date
+    teamId: number
+    _count: TeamMemberCountAggregateOutputType | null
+    _avg: TeamMemberAvgAggregateOutputType | null
+    _sum: TeamMemberSumAggregateOutputType | null
+    _min: TeamMemberMinAggregateOutputType | null
+    _max: TeamMemberMaxAggregateOutputType | null
+  }
+
+  type GetTeamMemberGroupByPayload<T extends TeamMemberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TeamMemberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TeamMemberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TeamMemberGroupByOutputType[P]>
+            : GetScalarType<T[P], TeamMemberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TeamMemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    teamId?: boolean
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teamMember"]>
+
+  export type TeamMemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    teamId?: boolean
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teamMember"]>
+
+  export type TeamMemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    teamId?: boolean
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teamMember"]>
+
+  export type TeamMemberSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    teamId?: boolean
+  }
+
+  export type TeamMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "createdAt" | "updatedAt" | "teamId", ExtArgs["result"]["teamMember"]>
+  export type TeamMemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }
+  export type TeamMemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }
+  export type TeamMemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    team?: boolean | TeamDefaultArgs<ExtArgs>
+  }
+
+  export type $TeamMemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TeamMember"
+    objects: {
+      team: Prisma.$TeamPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      createdAt: Date
+      updatedAt: Date
+      teamId: number
+    }, ExtArgs["result"]["teamMember"]>
+    composites: {}
+  }
+
+  type TeamMemberGetPayload<S extends boolean | null | undefined | TeamMemberDefaultArgs> = $Result.GetResult<Prisma.$TeamMemberPayload, S>
+
+  type TeamMemberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TeamMemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TeamMemberCountAggregateInputType | true
+    }
+
+  export interface TeamMemberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TeamMember'], meta: { name: 'TeamMember' } }
+    /**
+     * Find zero or one TeamMember that matches the filter.
+     * @param {TeamMemberFindUniqueArgs} args - Arguments to find a TeamMember
+     * @example
+     * // Get one TeamMember
+     * const teamMember = await prisma.teamMember.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TeamMemberFindUniqueArgs>(args: SelectSubset<T, TeamMemberFindUniqueArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TeamMember that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TeamMemberFindUniqueOrThrowArgs} args - Arguments to find a TeamMember
+     * @example
+     * // Get one TeamMember
+     * const teamMember = await prisma.teamMember.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TeamMemberFindUniqueOrThrowArgs>(args: SelectSubset<T, TeamMemberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeamMember that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberFindFirstArgs} args - Arguments to find a TeamMember
+     * @example
+     * // Get one TeamMember
+     * const teamMember = await prisma.teamMember.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TeamMemberFindFirstArgs>(args?: SelectSubset<T, TeamMemberFindFirstArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeamMember that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberFindFirstOrThrowArgs} args - Arguments to find a TeamMember
+     * @example
+     * // Get one TeamMember
+     * const teamMember = await prisma.teamMember.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TeamMemberFindFirstOrThrowArgs>(args?: SelectSubset<T, TeamMemberFindFirstOrThrowArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TeamMembers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TeamMembers
+     * const teamMembers = await prisma.teamMember.findMany()
+     * 
+     * // Get first 10 TeamMembers
+     * const teamMembers = await prisma.teamMember.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const teamMemberWithIdOnly = await prisma.teamMember.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TeamMemberFindManyArgs>(args?: SelectSubset<T, TeamMemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TeamMember.
+     * @param {TeamMemberCreateArgs} args - Arguments to create a TeamMember.
+     * @example
+     * // Create one TeamMember
+     * const TeamMember = await prisma.teamMember.create({
+     *   data: {
+     *     // ... data to create a TeamMember
+     *   }
+     * })
+     * 
+     */
+    create<T extends TeamMemberCreateArgs>(args: SelectSubset<T, TeamMemberCreateArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TeamMembers.
+     * @param {TeamMemberCreateManyArgs} args - Arguments to create many TeamMembers.
+     * @example
+     * // Create many TeamMembers
+     * const teamMember = await prisma.teamMember.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TeamMemberCreateManyArgs>(args?: SelectSubset<T, TeamMemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TeamMembers and returns the data saved in the database.
+     * @param {TeamMemberCreateManyAndReturnArgs} args - Arguments to create many TeamMembers.
+     * @example
+     * // Create many TeamMembers
+     * const teamMember = await prisma.teamMember.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TeamMembers and only return the `id`
+     * const teamMemberWithIdOnly = await prisma.teamMember.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TeamMemberCreateManyAndReturnArgs>(args?: SelectSubset<T, TeamMemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TeamMember.
+     * @param {TeamMemberDeleteArgs} args - Arguments to delete one TeamMember.
+     * @example
+     * // Delete one TeamMember
+     * const TeamMember = await prisma.teamMember.delete({
+     *   where: {
+     *     // ... filter to delete one TeamMember
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TeamMemberDeleteArgs>(args: SelectSubset<T, TeamMemberDeleteArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TeamMember.
+     * @param {TeamMemberUpdateArgs} args - Arguments to update one TeamMember.
+     * @example
+     * // Update one TeamMember
+     * const teamMember = await prisma.teamMember.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TeamMemberUpdateArgs>(args: SelectSubset<T, TeamMemberUpdateArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TeamMembers.
+     * @param {TeamMemberDeleteManyArgs} args - Arguments to filter TeamMembers to delete.
+     * @example
+     * // Delete a few TeamMembers
+     * const { count } = await prisma.teamMember.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TeamMemberDeleteManyArgs>(args?: SelectSubset<T, TeamMemberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeamMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TeamMembers
+     * const teamMember = await prisma.teamMember.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TeamMemberUpdateManyArgs>(args: SelectSubset<T, TeamMemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeamMembers and returns the data updated in the database.
+     * @param {TeamMemberUpdateManyAndReturnArgs} args - Arguments to update many TeamMembers.
+     * @example
+     * // Update many TeamMembers
+     * const teamMember = await prisma.teamMember.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TeamMembers and only return the `id`
+     * const teamMemberWithIdOnly = await prisma.teamMember.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TeamMemberUpdateManyAndReturnArgs>(args: SelectSubset<T, TeamMemberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TeamMember.
+     * @param {TeamMemberUpsertArgs} args - Arguments to update or create a TeamMember.
+     * @example
+     * // Update or create a TeamMember
+     * const teamMember = await prisma.teamMember.upsert({
+     *   create: {
+     *     // ... data to create a TeamMember
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TeamMember we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TeamMemberUpsertArgs>(args: SelectSubset<T, TeamMemberUpsertArgs<ExtArgs>>): Prisma__TeamMemberClient<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TeamMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberCountArgs} args - Arguments to filter TeamMembers to count.
+     * @example
+     * // Count the number of TeamMembers
+     * const count = await prisma.teamMember.count({
+     *   where: {
+     *     // ... the filter for the TeamMembers we want to count
+     *   }
+     * })
+    **/
+    count<T extends TeamMemberCountArgs>(
+      args?: Subset<T, TeamMemberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TeamMemberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TeamMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TeamMemberAggregateArgs>(args: Subset<T, TeamMemberAggregateArgs>): Prisma.PrismaPromise<GetTeamMemberAggregateType<T>>
+
+    /**
+     * Group by TeamMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeamMemberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TeamMemberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TeamMemberGroupByArgs['orderBy'] }
+        : { orderBy?: TeamMemberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TeamMemberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTeamMemberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TeamMember model
+   */
+  readonly fields: TeamMemberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TeamMember.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TeamMemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    team<T extends TeamDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeamDefaultArgs<ExtArgs>>): Prisma__TeamClient<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TeamMember model
+   */
+  interface TeamMemberFieldRefs {
+    readonly id: FieldRef<"TeamMember", 'Int'>
+    readonly name: FieldRef<"TeamMember", 'String'>
+    readonly email: FieldRef<"TeamMember", 'String'>
+    readonly createdAt: FieldRef<"TeamMember", 'DateTime'>
+    readonly updatedAt: FieldRef<"TeamMember", 'DateTime'>
+    readonly teamId: FieldRef<"TeamMember", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TeamMember findUnique
+   */
+  export type TeamMemberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which TeamMember to fetch.
+     */
+    where: TeamMemberWhereUniqueInput
+  }
+
+  /**
+   * TeamMember findUniqueOrThrow
+   */
+  export type TeamMemberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which TeamMember to fetch.
+     */
+    where: TeamMemberWhereUniqueInput
+  }
+
+  /**
+   * TeamMember findFirst
+   */
+  export type TeamMemberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which TeamMember to fetch.
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeamMembers to fetch.
+     */
+    orderBy?: TeamMemberOrderByWithRelationInput | TeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeamMembers.
+     */
+    cursor?: TeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeamMembers.
+     */
+    distinct?: TeamMemberScalarFieldEnum | TeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * TeamMember findFirstOrThrow
+   */
+  export type TeamMemberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which TeamMember to fetch.
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeamMembers to fetch.
+     */
+    orderBy?: TeamMemberOrderByWithRelationInput | TeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeamMembers.
+     */
+    cursor?: TeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeamMembers.
+     */
+    distinct?: TeamMemberScalarFieldEnum | TeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * TeamMember findMany
+   */
+  export type TeamMemberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which TeamMembers to fetch.
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeamMembers to fetch.
+     */
+    orderBy?: TeamMemberOrderByWithRelationInput | TeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TeamMembers.
+     */
+    cursor?: TeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeamMembers.
+     */
+    skip?: number
+    distinct?: TeamMemberScalarFieldEnum | TeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * TeamMember create
+   */
+  export type TeamMemberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TeamMember.
+     */
+    data: XOR<TeamMemberCreateInput, TeamMemberUncheckedCreateInput>
+  }
+
+  /**
+   * TeamMember createMany
+   */
+  export type TeamMemberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TeamMembers.
+     */
+    data: TeamMemberCreateManyInput | TeamMemberCreateManyInput[]
+  }
+
+  /**
+   * TeamMember createManyAndReturn
+   */
+  export type TeamMemberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * The data used to create many TeamMembers.
+     */
+    data: TeamMemberCreateManyInput | TeamMemberCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TeamMember update
+   */
+  export type TeamMemberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TeamMember.
+     */
+    data: XOR<TeamMemberUpdateInput, TeamMemberUncheckedUpdateInput>
+    /**
+     * Choose, which TeamMember to update.
+     */
+    where: TeamMemberWhereUniqueInput
+  }
+
+  /**
+   * TeamMember updateMany
+   */
+  export type TeamMemberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TeamMembers.
+     */
+    data: XOR<TeamMemberUpdateManyMutationInput, TeamMemberUncheckedUpdateManyInput>
+    /**
+     * Filter which TeamMembers to update
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * Limit how many TeamMembers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeamMember updateManyAndReturn
+   */
+  export type TeamMemberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * The data used to update TeamMembers.
+     */
+    data: XOR<TeamMemberUpdateManyMutationInput, TeamMemberUncheckedUpdateManyInput>
+    /**
+     * Filter which TeamMembers to update
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * Limit how many TeamMembers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TeamMember upsert
+   */
+  export type TeamMemberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TeamMember to update in case it exists.
+     */
+    where: TeamMemberWhereUniqueInput
+    /**
+     * In case the TeamMember found by the `where` argument doesn't exist, create a new TeamMember with this data.
+     */
+    create: XOR<TeamMemberCreateInput, TeamMemberUncheckedCreateInput>
+    /**
+     * In case the TeamMember was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TeamMemberUpdateInput, TeamMemberUncheckedUpdateInput>
+  }
+
+  /**
+   * TeamMember delete
+   */
+  export type TeamMemberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter which TeamMember to delete.
+     */
+    where: TeamMemberWhereUniqueInput
+  }
+
+  /**
+   * TeamMember deleteMany
+   */
+  export type TeamMemberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeamMembers to delete
+     */
+    where?: TeamMemberWhereInput
+    /**
+     * Limit how many TeamMembers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeamMember without action
+   */
+  export type TeamMemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeamMember
+     */
+    select?: TeamMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeamMember
+     */
+    omit?: TeamMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamMemberInclude<ExtArgs> | null
   }
 
 
@@ -3893,7 +5128,7 @@ export namespace Prisma {
     updatedAt?: boolean
     competitionId?: boolean
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
-    constraints?: boolean | Challenge$constraintsArgs<ExtArgs>
+    criteria?: boolean | Challenge$criteriaArgs<ExtArgs>
     submissions?: boolean | Challenge$submissionsArgs<ExtArgs>
     _count?: boolean | ChallengeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
@@ -3933,7 +5168,7 @@ export namespace Prisma {
   export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "totalPoints" | "createdAt" | "updatedAt" | "competitionId", ExtArgs["result"]["challenge"]>
   export type ChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
-    constraints?: boolean | Challenge$constraintsArgs<ExtArgs>
+    criteria?: boolean | Challenge$criteriaArgs<ExtArgs>
     submissions?: boolean | Challenge$submissionsArgs<ExtArgs>
     _count?: boolean | ChallengeCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3948,7 +5183,7 @@ export namespace Prisma {
     name: "Challenge"
     objects: {
       competition: Prisma.$CompetitionPayload<ExtArgs>
-      constraints: Prisma.$ConstraintPayload<ExtArgs>[]
+      criteria: Prisma.$CriterionPayload<ExtArgs>[]
       submissions: Prisma.$SubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4354,7 +5589,7 @@ export namespace Prisma {
   export interface Prisma__ChallengeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     competition<T extends CompetitionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionDefaultArgs<ExtArgs>>): Prisma__CompetitionClient<$Result.GetResult<Prisma.$CompetitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    constraints<T extends Challenge$constraintsArgs<ExtArgs> = {}>(args?: Subset<T, Challenge$constraintsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    criteria<T extends Challenge$criteriaArgs<ExtArgs> = {}>(args?: Subset<T, Challenge$criteriaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     submissions<T extends Challenge$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Challenge$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4786,27 +6021,27 @@ export namespace Prisma {
   }
 
   /**
-   * Challenge.constraints
+   * Challenge.criteria
    */
-  export type Challenge$constraintsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Challenge$criteriaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
-    where?: ConstraintWhereInput
-    orderBy?: ConstraintOrderByWithRelationInput | ConstraintOrderByWithRelationInput[]
-    cursor?: ConstraintWhereUniqueInput
+    include?: CriterionInclude<ExtArgs> | null
+    where?: CriterionWhereInput
+    orderBy?: CriterionOrderByWithRelationInput | CriterionOrderByWithRelationInput[]
+    cursor?: CriterionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ConstraintScalarFieldEnum | ConstraintScalarFieldEnum[]
+    distinct?: CriterionScalarFieldEnum | CriterionScalarFieldEnum[]
   }
 
   /**
@@ -4853,40 +6088,30 @@ export namespace Prisma {
 
 
   /**
-   * Model Constraint
+   * Model Criterion
    */
 
-  export type AggregateConstraint = {
-    _count: ConstraintCountAggregateOutputType | null
-    _avg: ConstraintAvgAggregateOutputType | null
-    _sum: ConstraintSumAggregateOutputType | null
-    _min: ConstraintMinAggregateOutputType | null
-    _max: ConstraintMaxAggregateOutputType | null
+  export type AggregateCriterion = {
+    _count: CriterionCountAggregateOutputType | null
+    _avg: CriterionAvgAggregateOutputType | null
+    _sum: CriterionSumAggregateOutputType | null
+    _min: CriterionMinAggregateOutputType | null
+    _max: CriterionMaxAggregateOutputType | null
   }
 
-  export type ConstraintAvgAggregateOutputType = {
+  export type CriterionAvgAggregateOutputType = {
     id: number | null
     points: number | null
     challengeId: number | null
   }
 
-  export type ConstraintSumAggregateOutputType = {
+  export type CriterionSumAggregateOutputType = {
     id: number | null
     points: number | null
     challengeId: number | null
   }
 
-  export type ConstraintMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    description: string | null
-    points: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    challengeId: number | null
-  }
-
-  export type ConstraintMaxAggregateOutputType = {
+  export type CriterionMinAggregateOutputType = {
     id: number | null
     name: string | null
     description: string | null
@@ -4896,7 +6121,17 @@ export namespace Prisma {
     challengeId: number | null
   }
 
-  export type ConstraintCountAggregateOutputType = {
+  export type CriterionMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    description: string | null
+    points: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    challengeId: number | null
+  }
+
+  export type CriterionCountAggregateOutputType = {
     id: number
     name: number
     description: number
@@ -4908,29 +6143,19 @@ export namespace Prisma {
   }
 
 
-  export type ConstraintAvgAggregateInputType = {
+  export type CriterionAvgAggregateInputType = {
     id?: true
     points?: true
     challengeId?: true
   }
 
-  export type ConstraintSumAggregateInputType = {
+  export type CriterionSumAggregateInputType = {
     id?: true
     points?: true
     challengeId?: true
   }
 
-  export type ConstraintMinAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    points?: true
-    createdAt?: true
-    updatedAt?: true
-    challengeId?: true
-  }
-
-  export type ConstraintMaxAggregateInputType = {
+  export type CriterionMinAggregateInputType = {
     id?: true
     name?: true
     description?: true
@@ -4940,7 +6165,17 @@ export namespace Prisma {
     challengeId?: true
   }
 
-  export type ConstraintCountAggregateInputType = {
+  export type CriterionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    points?: true
+    createdAt?: true
+    updatedAt?: true
+    challengeId?: true
+  }
+
+  export type CriterionCountAggregateInputType = {
     id?: true
     name?: true
     description?: true
@@ -4951,93 +6186,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ConstraintAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Constraint to aggregate.
+     * Filter which Criterion to aggregate.
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Constraints to fetch.
+     * Determine the order of Criteria to fetch.
      */
-    orderBy?: ConstraintOrderByWithRelationInput | ConstraintOrderByWithRelationInput[]
+    orderBy?: CriterionOrderByWithRelationInput | CriterionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ConstraintWhereUniqueInput
+    cursor?: CriterionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Constraints from the position of the cursor.
+     * Take `±n` Criteria from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Constraints.
+     * Skip the first `n` Criteria.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Constraints
+     * Count returned Criteria
     **/
-    _count?: true | ConstraintCountAggregateInputType
+    _count?: true | CriterionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ConstraintAvgAggregateInputType
+    _avg?: CriterionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ConstraintSumAggregateInputType
+    _sum?: CriterionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ConstraintMinAggregateInputType
+    _min?: CriterionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ConstraintMaxAggregateInputType
+    _max?: CriterionMaxAggregateInputType
   }
 
-  export type GetConstraintAggregateType<T extends ConstraintAggregateArgs> = {
-        [P in keyof T & keyof AggregateConstraint]: P extends '_count' | 'count'
+  export type GetCriterionAggregateType<T extends CriterionAggregateArgs> = {
+        [P in keyof T & keyof AggregateCriterion]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateConstraint[P]>
-      : GetScalarType<T[P], AggregateConstraint[P]>
+        : GetScalarType<T[P], AggregateCriterion[P]>
+      : GetScalarType<T[P], AggregateCriterion[P]>
   }
 
 
 
 
-  export type ConstraintGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConstraintWhereInput
-    orderBy?: ConstraintOrderByWithAggregationInput | ConstraintOrderByWithAggregationInput[]
-    by: ConstraintScalarFieldEnum[] | ConstraintScalarFieldEnum
-    having?: ConstraintScalarWhereWithAggregatesInput
+  export type CriterionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CriterionWhereInput
+    orderBy?: CriterionOrderByWithAggregationInput | CriterionOrderByWithAggregationInput[]
+    by: CriterionScalarFieldEnum[] | CriterionScalarFieldEnum
+    having?: CriterionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ConstraintCountAggregateInputType | true
-    _avg?: ConstraintAvgAggregateInputType
-    _sum?: ConstraintSumAggregateInputType
-    _min?: ConstraintMinAggregateInputType
-    _max?: ConstraintMaxAggregateInputType
+    _count?: CriterionCountAggregateInputType | true
+    _avg?: CriterionAvgAggregateInputType
+    _sum?: CriterionSumAggregateInputType
+    _min?: CriterionMinAggregateInputType
+    _max?: CriterionMaxAggregateInputType
   }
 
-  export type ConstraintGroupByOutputType = {
+  export type CriterionGroupByOutputType = {
     id: number
     name: string
     description: string | null
@@ -5045,28 +6280,28 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     challengeId: number
-    _count: ConstraintCountAggregateOutputType | null
-    _avg: ConstraintAvgAggregateOutputType | null
-    _sum: ConstraintSumAggregateOutputType | null
-    _min: ConstraintMinAggregateOutputType | null
-    _max: ConstraintMaxAggregateOutputType | null
+    _count: CriterionCountAggregateOutputType | null
+    _avg: CriterionAvgAggregateOutputType | null
+    _sum: CriterionSumAggregateOutputType | null
+    _min: CriterionMinAggregateOutputType | null
+    _max: CriterionMaxAggregateOutputType | null
   }
 
-  type GetConstraintGroupByPayload<T extends ConstraintGroupByArgs> = Prisma.PrismaPromise<
+  type GetCriterionGroupByPayload<T extends CriterionGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ConstraintGroupByOutputType, T['by']> &
+      PickEnumerable<CriterionGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ConstraintGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof CriterionGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ConstraintGroupByOutputType[P]>
-            : GetScalarType<T[P], ConstraintGroupByOutputType[P]>
+              : GetScalarType<T[P], CriterionGroupByOutputType[P]>
+            : GetScalarType<T[P], CriterionGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ConstraintSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CriterionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     description?: boolean
@@ -5075,9 +6310,9 @@ export namespace Prisma {
     updatedAt?: boolean
     challengeId?: boolean
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["constraint"]>
+  }, ExtArgs["result"]["criterion"]>
 
-  export type ConstraintSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CriterionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     description?: boolean
@@ -5086,9 +6321,9 @@ export namespace Prisma {
     updatedAt?: boolean
     challengeId?: boolean
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["constraint"]>
+  }, ExtArgs["result"]["criterion"]>
 
-  export type ConstraintSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CriterionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     description?: boolean
@@ -5097,9 +6332,9 @@ export namespace Prisma {
     updatedAt?: boolean
     challengeId?: boolean
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["constraint"]>
+  }, ExtArgs["result"]["criterion"]>
 
-  export type ConstraintSelectScalar = {
+  export type CriterionSelectScalar = {
     id?: boolean
     name?: boolean
     description?: boolean
@@ -5109,19 +6344,19 @@ export namespace Prisma {
     challengeId?: boolean
   }
 
-  export type ConstraintOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "points" | "createdAt" | "updatedAt" | "challengeId", ExtArgs["result"]["constraint"]>
-  export type ConstraintInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "points" | "createdAt" | "updatedAt" | "challengeId", ExtArgs["result"]["criterion"]>
+  export type CriterionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
   }
-  export type ConstraintIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
   }
-  export type ConstraintIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     challenge?: boolean | ChallengeDefaultArgs<ExtArgs>
   }
 
-  export type $ConstraintPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Constraint"
+  export type $CriterionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Criterion"
     objects: {
       challenge: Prisma.$ChallengePayload<ExtArgs>
     }
@@ -5133,136 +6368,136 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       challengeId: number
-    }, ExtArgs["result"]["constraint"]>
+    }, ExtArgs["result"]["criterion"]>
     composites: {}
   }
 
-  type ConstraintGetPayload<S extends boolean | null | undefined | ConstraintDefaultArgs> = $Result.GetResult<Prisma.$ConstraintPayload, S>
+  type CriterionGetPayload<S extends boolean | null | undefined | CriterionDefaultArgs> = $Result.GetResult<Prisma.$CriterionPayload, S>
 
-  type ConstraintCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ConstraintFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ConstraintCountAggregateInputType | true
+  type CriterionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CriterionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CriterionCountAggregateInputType | true
     }
 
-  export interface ConstraintDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Constraint'], meta: { name: 'Constraint' } }
+  export interface CriterionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Criterion'], meta: { name: 'Criterion' } }
     /**
-     * Find zero or one Constraint that matches the filter.
-     * @param {ConstraintFindUniqueArgs} args - Arguments to find a Constraint
+     * Find zero or one Criterion that matches the filter.
+     * @param {CriterionFindUniqueArgs} args - Arguments to find a Criterion
      * @example
-     * // Get one Constraint
-     * const constraint = await prisma.constraint.findUnique({
+     * // Get one Criterion
+     * const criterion = await prisma.criterion.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ConstraintFindUniqueArgs>(args: SelectSubset<T, ConstraintFindUniqueArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CriterionFindUniqueArgs>(args: SelectSubset<T, CriterionFindUniqueArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Constraint that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Criterion that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ConstraintFindUniqueOrThrowArgs} args - Arguments to find a Constraint
+     * @param {CriterionFindUniqueOrThrowArgs} args - Arguments to find a Criterion
      * @example
-     * // Get one Constraint
-     * const constraint = await prisma.constraint.findUniqueOrThrow({
+     * // Get one Criterion
+     * const criterion = await prisma.criterion.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ConstraintFindUniqueOrThrowArgs>(args: SelectSubset<T, ConstraintFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CriterionFindUniqueOrThrowArgs>(args: SelectSubset<T, CriterionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Constraint that matches the filter.
+     * Find the first Criterion that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintFindFirstArgs} args - Arguments to find a Constraint
+     * @param {CriterionFindFirstArgs} args - Arguments to find a Criterion
      * @example
-     * // Get one Constraint
-     * const constraint = await prisma.constraint.findFirst({
+     * // Get one Criterion
+     * const criterion = await prisma.criterion.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ConstraintFindFirstArgs>(args?: SelectSubset<T, ConstraintFindFirstArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CriterionFindFirstArgs>(args?: SelectSubset<T, CriterionFindFirstArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Constraint that matches the filter or
+     * Find the first Criterion that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintFindFirstOrThrowArgs} args - Arguments to find a Constraint
+     * @param {CriterionFindFirstOrThrowArgs} args - Arguments to find a Criterion
      * @example
-     * // Get one Constraint
-     * const constraint = await prisma.constraint.findFirstOrThrow({
+     * // Get one Criterion
+     * const criterion = await prisma.criterion.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ConstraintFindFirstOrThrowArgs>(args?: SelectSubset<T, ConstraintFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CriterionFindFirstOrThrowArgs>(args?: SelectSubset<T, CriterionFindFirstOrThrowArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Constraints that matches the filter.
+     * Find zero or more Criteria that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CriterionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Constraints
-     * const constraints = await prisma.constraint.findMany()
+     * // Get all Criteria
+     * const criteria = await prisma.criterion.findMany()
      * 
-     * // Get first 10 Constraints
-     * const constraints = await prisma.constraint.findMany({ take: 10 })
+     * // Get first 10 Criteria
+     * const criteria = await prisma.criterion.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const constraintWithIdOnly = await prisma.constraint.findMany({ select: { id: true } })
+     * const criterionWithIdOnly = await prisma.criterion.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ConstraintFindManyArgs>(args?: SelectSubset<T, ConstraintFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CriterionFindManyArgs>(args?: SelectSubset<T, CriterionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Constraint.
-     * @param {ConstraintCreateArgs} args - Arguments to create a Constraint.
+     * Create a Criterion.
+     * @param {CriterionCreateArgs} args - Arguments to create a Criterion.
      * @example
-     * // Create one Constraint
-     * const Constraint = await prisma.constraint.create({
+     * // Create one Criterion
+     * const Criterion = await prisma.criterion.create({
      *   data: {
-     *     // ... data to create a Constraint
+     *     // ... data to create a Criterion
      *   }
      * })
      * 
      */
-    create<T extends ConstraintCreateArgs>(args: SelectSubset<T, ConstraintCreateArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CriterionCreateArgs>(args: SelectSubset<T, CriterionCreateArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Constraints.
-     * @param {ConstraintCreateManyArgs} args - Arguments to create many Constraints.
+     * Create many Criteria.
+     * @param {CriterionCreateManyArgs} args - Arguments to create many Criteria.
      * @example
-     * // Create many Constraints
-     * const constraint = await prisma.constraint.createMany({
+     * // Create many Criteria
+     * const criterion = await prisma.criterion.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ConstraintCreateManyArgs>(args?: SelectSubset<T, ConstraintCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CriterionCreateManyArgs>(args?: SelectSubset<T, CriterionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Constraints and returns the data saved in the database.
-     * @param {ConstraintCreateManyAndReturnArgs} args - Arguments to create many Constraints.
+     * Create many Criteria and returns the data saved in the database.
+     * @param {CriterionCreateManyAndReturnArgs} args - Arguments to create many Criteria.
      * @example
-     * // Create many Constraints
-     * const constraint = await prisma.constraint.createManyAndReturn({
+     * // Create many Criteria
+     * const criterion = await prisma.criterion.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Constraints and only return the `id`
-     * const constraintWithIdOnly = await prisma.constraint.createManyAndReturn({
+     * // Create many Criteria and only return the `id`
+     * const criterionWithIdOnly = await prisma.criterion.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5272,28 +6507,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ConstraintCreateManyAndReturnArgs>(args?: SelectSubset<T, ConstraintCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends CriterionCreateManyAndReturnArgs>(args?: SelectSubset<T, CriterionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Constraint.
-     * @param {ConstraintDeleteArgs} args - Arguments to delete one Constraint.
+     * Delete a Criterion.
+     * @param {CriterionDeleteArgs} args - Arguments to delete one Criterion.
      * @example
-     * // Delete one Constraint
-     * const Constraint = await prisma.constraint.delete({
+     * // Delete one Criterion
+     * const Criterion = await prisma.criterion.delete({
      *   where: {
-     *     // ... filter to delete one Constraint
+     *     // ... filter to delete one Criterion
      *   }
      * })
      * 
      */
-    delete<T extends ConstraintDeleteArgs>(args: SelectSubset<T, ConstraintDeleteArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CriterionDeleteArgs>(args: SelectSubset<T, CriterionDeleteArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Constraint.
-     * @param {ConstraintUpdateArgs} args - Arguments to update one Constraint.
+     * Update one Criterion.
+     * @param {CriterionUpdateArgs} args - Arguments to update one Criterion.
      * @example
-     * // Update one Constraint
-     * const constraint = await prisma.constraint.update({
+     * // Update one Criterion
+     * const criterion = await prisma.criterion.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5303,30 +6538,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ConstraintUpdateArgs>(args: SelectSubset<T, ConstraintUpdateArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CriterionUpdateArgs>(args: SelectSubset<T, CriterionUpdateArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Constraints.
-     * @param {ConstraintDeleteManyArgs} args - Arguments to filter Constraints to delete.
+     * Delete zero or more Criteria.
+     * @param {CriterionDeleteManyArgs} args - Arguments to filter Criteria to delete.
      * @example
-     * // Delete a few Constraints
-     * const { count } = await prisma.constraint.deleteMany({
+     * // Delete a few Criteria
+     * const { count } = await prisma.criterion.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ConstraintDeleteManyArgs>(args?: SelectSubset<T, ConstraintDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CriterionDeleteManyArgs>(args?: SelectSubset<T, CriterionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Constraints.
+     * Update zero or more Criteria.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CriterionUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Constraints
-     * const constraint = await prisma.constraint.updateMany({
+     * // Update many Criteria
+     * const criterion = await prisma.criterion.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5336,14 +6571,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ConstraintUpdateManyArgs>(args: SelectSubset<T, ConstraintUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CriterionUpdateManyArgs>(args: SelectSubset<T, CriterionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Constraints and returns the data updated in the database.
-     * @param {ConstraintUpdateManyAndReturnArgs} args - Arguments to update many Constraints.
+     * Update zero or more Criteria and returns the data updated in the database.
+     * @param {CriterionUpdateManyAndReturnArgs} args - Arguments to update many Criteria.
      * @example
-     * // Update many Constraints
-     * const constraint = await prisma.constraint.updateManyAndReturn({
+     * // Update many Criteria
+     * const criterion = await prisma.criterion.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5352,8 +6587,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Constraints and only return the `id`
-     * const constraintWithIdOnly = await prisma.constraint.updateManyAndReturn({
+     * // Update zero or more Criteria and only return the `id`
+     * const criterionWithIdOnly = await prisma.criterion.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5366,56 +6601,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ConstraintUpdateManyAndReturnArgs>(args: SelectSubset<T, ConstraintUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends CriterionUpdateManyAndReturnArgs>(args: SelectSubset<T, CriterionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Constraint.
-     * @param {ConstraintUpsertArgs} args - Arguments to update or create a Constraint.
+     * Create or update one Criterion.
+     * @param {CriterionUpsertArgs} args - Arguments to update or create a Criterion.
      * @example
-     * // Update or create a Constraint
-     * const constraint = await prisma.constraint.upsert({
+     * // Update or create a Criterion
+     * const criterion = await prisma.criterion.upsert({
      *   create: {
-     *     // ... data to create a Constraint
+     *     // ... data to create a Criterion
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Constraint we want to update
+     *     // ... the filter for the Criterion we want to update
      *   }
      * })
      */
-    upsert<T extends ConstraintUpsertArgs>(args: SelectSubset<T, ConstraintUpsertArgs<ExtArgs>>): Prisma__ConstraintClient<$Result.GetResult<Prisma.$ConstraintPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends CriterionUpsertArgs>(args: SelectSubset<T, CriterionUpsertArgs<ExtArgs>>): Prisma__CriterionClient<$Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Constraints.
+     * Count the number of Criteria.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintCountArgs} args - Arguments to filter Constraints to count.
+     * @param {CriterionCountArgs} args - Arguments to filter Criteria to count.
      * @example
-     * // Count the number of Constraints
-     * const count = await prisma.constraint.count({
+     * // Count the number of Criteria
+     * const count = await prisma.criterion.count({
      *   where: {
-     *     // ... the filter for the Constraints we want to count
+     *     // ... the filter for the Criteria we want to count
      *   }
      * })
     **/
-    count<T extends ConstraintCountArgs>(
-      args?: Subset<T, ConstraintCountArgs>,
+    count<T extends CriterionCountArgs>(
+      args?: Subset<T, CriterionCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ConstraintCountAggregateOutputType>
+          : GetScalarType<T['select'], CriterionCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Constraint.
+     * Allows you to perform aggregations operations on a Criterion.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {CriterionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5435,13 +6670,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ConstraintAggregateArgs>(args: Subset<T, ConstraintAggregateArgs>): Prisma.PrismaPromise<GetConstraintAggregateType<T>>
+    aggregate<T extends CriterionAggregateArgs>(args: Subset<T, CriterionAggregateArgs>): Prisma.PrismaPromise<GetCriterionAggregateType<T>>
 
     /**
-     * Group by Constraint.
+     * Group by Criterion.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConstraintGroupByArgs} args - Group by arguments.
+     * @param {CriterionGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5456,14 +6691,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ConstraintGroupByArgs,
+      T extends CriterionGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ConstraintGroupByArgs['orderBy'] }
-        : { orderBy?: ConstraintGroupByArgs['orderBy'] },
+        ? { orderBy: CriterionGroupByArgs['orderBy'] }
+        : { orderBy?: CriterionGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5512,20 +6747,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ConstraintGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConstraintGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CriterionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCriterionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Constraint model
+   * Fields of the Criterion model
    */
-  readonly fields: ConstraintFieldRefs;
+  readonly fields: CriterionFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Constraint.
+   * The delegate class that acts as a "Promise-like" for Criterion.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ConstraintClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CriterionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     challenge<T extends ChallengeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeDefaultArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -5554,425 +6789,425 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Constraint model
+   * Fields of the Criterion model
    */
-  interface ConstraintFieldRefs {
-    readonly id: FieldRef<"Constraint", 'Int'>
-    readonly name: FieldRef<"Constraint", 'String'>
-    readonly description: FieldRef<"Constraint", 'String'>
-    readonly points: FieldRef<"Constraint", 'Int'>
-    readonly createdAt: FieldRef<"Constraint", 'DateTime'>
-    readonly updatedAt: FieldRef<"Constraint", 'DateTime'>
-    readonly challengeId: FieldRef<"Constraint", 'Int'>
+  interface CriterionFieldRefs {
+    readonly id: FieldRef<"Criterion", 'Int'>
+    readonly name: FieldRef<"Criterion", 'String'>
+    readonly description: FieldRef<"Criterion", 'String'>
+    readonly points: FieldRef<"Criterion", 'Int'>
+    readonly createdAt: FieldRef<"Criterion", 'DateTime'>
+    readonly updatedAt: FieldRef<"Criterion", 'DateTime'>
+    readonly challengeId: FieldRef<"Criterion", 'Int'>
   }
     
 
   // Custom InputTypes
   /**
-   * Constraint findUnique
+   * Criterion findUnique
    */
-  export type ConstraintFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter, which Constraint to fetch.
+     * Filter, which Criterion to fetch.
      */
-    where: ConstraintWhereUniqueInput
+    where: CriterionWhereUniqueInput
   }
 
   /**
-   * Constraint findUniqueOrThrow
+   * Criterion findUniqueOrThrow
    */
-  export type ConstraintFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter, which Constraint to fetch.
+     * Filter, which Criterion to fetch.
      */
-    where: ConstraintWhereUniqueInput
+    where: CriterionWhereUniqueInput
   }
 
   /**
-   * Constraint findFirst
+   * Criterion findFirst
    */
-  export type ConstraintFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter, which Constraint to fetch.
+     * Filter, which Criterion to fetch.
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Constraints to fetch.
+     * Determine the order of Criteria to fetch.
      */
-    orderBy?: ConstraintOrderByWithRelationInput | ConstraintOrderByWithRelationInput[]
+    orderBy?: CriterionOrderByWithRelationInput | CriterionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Constraints.
+     * Sets the position for searching for Criteria.
      */
-    cursor?: ConstraintWhereUniqueInput
+    cursor?: CriterionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Constraints from the position of the cursor.
+     * Take `±n` Criteria from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Constraints.
+     * Skip the first `n` Criteria.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Constraints.
+     * Filter by unique combinations of Criteria.
      */
-    distinct?: ConstraintScalarFieldEnum | ConstraintScalarFieldEnum[]
+    distinct?: CriterionScalarFieldEnum | CriterionScalarFieldEnum[]
   }
 
   /**
-   * Constraint findFirstOrThrow
+   * Criterion findFirstOrThrow
    */
-  export type ConstraintFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter, which Constraint to fetch.
+     * Filter, which Criterion to fetch.
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Constraints to fetch.
+     * Determine the order of Criteria to fetch.
      */
-    orderBy?: ConstraintOrderByWithRelationInput | ConstraintOrderByWithRelationInput[]
+    orderBy?: CriterionOrderByWithRelationInput | CriterionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Constraints.
+     * Sets the position for searching for Criteria.
      */
-    cursor?: ConstraintWhereUniqueInput
+    cursor?: CriterionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Constraints from the position of the cursor.
+     * Take `±n` Criteria from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Constraints.
+     * Skip the first `n` Criteria.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Constraints.
+     * Filter by unique combinations of Criteria.
      */
-    distinct?: ConstraintScalarFieldEnum | ConstraintScalarFieldEnum[]
+    distinct?: CriterionScalarFieldEnum | CriterionScalarFieldEnum[]
   }
 
   /**
-   * Constraint findMany
+   * Criterion findMany
    */
-  export type ConstraintFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter, which Constraints to fetch.
+     * Filter, which Criteria to fetch.
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Constraints to fetch.
+     * Determine the order of Criteria to fetch.
      */
-    orderBy?: ConstraintOrderByWithRelationInput | ConstraintOrderByWithRelationInput[]
+    orderBy?: CriterionOrderByWithRelationInput | CriterionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Constraints.
+     * Sets the position for listing Criteria.
      */
-    cursor?: ConstraintWhereUniqueInput
+    cursor?: CriterionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Constraints from the position of the cursor.
+     * Take `±n` Criteria from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Constraints.
+     * Skip the first `n` Criteria.
      */
     skip?: number
-    distinct?: ConstraintScalarFieldEnum | ConstraintScalarFieldEnum[]
+    distinct?: CriterionScalarFieldEnum | CriterionScalarFieldEnum[]
   }
 
   /**
-   * Constraint create
+   * Criterion create
    */
-  export type ConstraintCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * The data needed to create a Constraint.
+     * The data needed to create a Criterion.
      */
-    data: XOR<ConstraintCreateInput, ConstraintUncheckedCreateInput>
+    data: XOR<CriterionCreateInput, CriterionUncheckedCreateInput>
   }
 
   /**
-   * Constraint createMany
+   * Criterion createMany
    */
-  export type ConstraintCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Constraints.
+     * The data used to create many Criteria.
      */
-    data: ConstraintCreateManyInput | ConstraintCreateManyInput[]
+    data: CriterionCreateManyInput | CriterionCreateManyInput[]
   }
 
   /**
-   * Constraint createManyAndReturn
+   * Criterion createManyAndReturn
    */
-  export type ConstraintCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CriterionSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
-     * The data used to create many Constraints.
+     * The data used to create many Criteria.
      */
-    data: ConstraintCreateManyInput | ConstraintCreateManyInput[]
+    data: CriterionCreateManyInput | CriterionCreateManyInput[]
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: CriterionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Constraint update
+   * Criterion update
    */
-  export type ConstraintUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * The data needed to update a Constraint.
+     * The data needed to update a Criterion.
      */
-    data: XOR<ConstraintUpdateInput, ConstraintUncheckedUpdateInput>
+    data: XOR<CriterionUpdateInput, CriterionUncheckedUpdateInput>
     /**
-     * Choose, which Constraint to update.
+     * Choose, which Criterion to update.
      */
-    where: ConstraintWhereUniqueInput
+    where: CriterionWhereUniqueInput
   }
 
   /**
-   * Constraint updateMany
+   * Criterion updateMany
    */
-  export type ConstraintUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Constraints.
+     * The data used to update Criteria.
      */
-    data: XOR<ConstraintUpdateManyMutationInput, ConstraintUncheckedUpdateManyInput>
+    data: XOR<CriterionUpdateManyMutationInput, CriterionUncheckedUpdateManyInput>
     /**
-     * Filter which Constraints to update
+     * Filter which Criteria to update
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
-     * Limit how many Constraints to update.
+     * Limit how many Criteria to update.
      */
     limit?: number
   }
 
   /**
-   * Constraint updateManyAndReturn
+   * Criterion updateManyAndReturn
    */
-  export type ConstraintUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: CriterionSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
-     * The data used to update Constraints.
+     * The data used to update Criteria.
      */
-    data: XOR<ConstraintUpdateManyMutationInput, ConstraintUncheckedUpdateManyInput>
+    data: XOR<CriterionUpdateManyMutationInput, CriterionUncheckedUpdateManyInput>
     /**
-     * Filter which Constraints to update
+     * Filter which Criteria to update
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
-     * Limit how many Constraints to update.
+     * Limit how many Criteria to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: CriterionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Constraint upsert
+   * Criterion upsert
    */
-  export type ConstraintUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * The filter to search for the Constraint to update in case it exists.
+     * The filter to search for the Criterion to update in case it exists.
      */
-    where: ConstraintWhereUniqueInput
+    where: CriterionWhereUniqueInput
     /**
-     * In case the Constraint found by the `where` argument doesn't exist, create a new Constraint with this data.
+     * In case the Criterion found by the `where` argument doesn't exist, create a new Criterion with this data.
      */
-    create: XOR<ConstraintCreateInput, ConstraintUncheckedCreateInput>
+    create: XOR<CriterionCreateInput, CriterionUncheckedCreateInput>
     /**
-     * In case the Constraint was found with the provided `where` argument, update it with this data.
+     * In case the Criterion was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ConstraintUpdateInput, ConstraintUncheckedUpdateInput>
+    update: XOR<CriterionUpdateInput, CriterionUncheckedUpdateInput>
   }
 
   /**
-   * Constraint delete
+   * Criterion delete
    */
-  export type ConstraintDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
     /**
-     * Filter which Constraint to delete.
+     * Filter which Criterion to delete.
      */
-    where: ConstraintWhereUniqueInput
+    where: CriterionWhereUniqueInput
   }
 
   /**
-   * Constraint deleteMany
+   * Criterion deleteMany
    */
-  export type ConstraintDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Constraints to delete
+     * Filter which Criteria to delete
      */
-    where?: ConstraintWhereInput
+    where?: CriterionWhereInput
     /**
-     * Limit how many Constraints to delete.
+     * Limit how many Criteria to delete.
      */
     limit?: number
   }
 
   /**
-   * Constraint without action
+   * Criterion without action
    */
-  export type ConstraintDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CriterionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Constraint
+     * Select specific fields to fetch from the Criterion
      */
-    select?: ConstraintSelect<ExtArgs> | null
+    select?: CriterionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Constraint
+     * Omit specific fields from the Criterion
      */
-    omit?: ConstraintOmit<ExtArgs> | null
+    omit?: CriterionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConstraintInclude<ExtArgs> | null
+    include?: CriterionInclude<ExtArgs> | null
   }
 
 
@@ -7162,6 +8397,18 @@ export namespace Prisma {
   export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
 
 
+  export const TeamMemberScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    teamId: 'teamId'
+  };
+
+  export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
+
+
   export const ChallengeScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -7175,7 +8422,7 @@ export namespace Prisma {
   export type ChallengeScalarFieldEnum = (typeof ChallengeScalarFieldEnum)[keyof typeof ChallengeScalarFieldEnum]
 
 
-  export const ConstraintScalarFieldEnum: {
+  export const CriterionScalarFieldEnum: {
     id: 'id',
     name: 'name',
     description: 'description',
@@ -7185,7 +8432,7 @@ export namespace Prisma {
     challengeId: 'challengeId'
   };
 
-  export type ConstraintScalarFieldEnum = (typeof ConstraintScalarFieldEnum)[keyof typeof ConstraintScalarFieldEnum]
+  export type CriterionScalarFieldEnum = (typeof CriterionScalarFieldEnum)[keyof typeof CriterionScalarFieldEnum]
 
 
   export const SubmissionScalarFieldEnum: {
@@ -7344,6 +8591,7 @@ export namespace Prisma {
     score?: IntFilter<"Team"> | number
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
     submissions?: SubmissionListRelationFilter
+    members?: TeamMemberListRelationFilter
   }
 
   export type TeamOrderByWithRelationInput = {
@@ -7356,6 +8604,7 @@ export namespace Prisma {
     score?: SortOrder
     competition?: CompetitionOrderByWithRelationInput
     submissions?: SubmissionOrderByRelationAggregateInput
+    members?: TeamMemberOrderByRelationAggregateInput
   }
 
   export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -7371,6 +8620,7 @@ export namespace Prisma {
     score?: IntFilter<"Team"> | number
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
     submissions?: SubmissionListRelationFilter
+    members?: TeamMemberListRelationFilter
   }, "id">
 
   export type TeamOrderByWithAggregationInput = {
@@ -7401,6 +8651,68 @@ export namespace Prisma {
     score?: IntWithAggregatesFilter<"Team"> | number
   }
 
+  export type TeamMemberWhereInput = {
+    AND?: TeamMemberWhereInput | TeamMemberWhereInput[]
+    OR?: TeamMemberWhereInput[]
+    NOT?: TeamMemberWhereInput | TeamMemberWhereInput[]
+    id?: IntFilter<"TeamMember"> | number
+    name?: StringFilter<"TeamMember"> | string
+    email?: StringFilter<"TeamMember"> | string
+    createdAt?: DateTimeFilter<"TeamMember"> | Date | string
+    updatedAt?: DateTimeFilter<"TeamMember"> | Date | string
+    teamId?: IntFilter<"TeamMember"> | number
+    team?: XOR<TeamScalarRelationFilter, TeamWhereInput>
+  }
+
+  export type TeamMemberOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    teamId?: SortOrder
+    team?: TeamOrderByWithRelationInput
+  }
+
+  export type TeamMemberWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: TeamMemberWhereInput | TeamMemberWhereInput[]
+    OR?: TeamMemberWhereInput[]
+    NOT?: TeamMemberWhereInput | TeamMemberWhereInput[]
+    name?: StringFilter<"TeamMember"> | string
+    createdAt?: DateTimeFilter<"TeamMember"> | Date | string
+    updatedAt?: DateTimeFilter<"TeamMember"> | Date | string
+    teamId?: IntFilter<"TeamMember"> | number
+    team?: XOR<TeamScalarRelationFilter, TeamWhereInput>
+  }, "id" | "email">
+
+  export type TeamMemberOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    teamId?: SortOrder
+    _count?: TeamMemberCountOrderByAggregateInput
+    _avg?: TeamMemberAvgOrderByAggregateInput
+    _max?: TeamMemberMaxOrderByAggregateInput
+    _min?: TeamMemberMinOrderByAggregateInput
+    _sum?: TeamMemberSumOrderByAggregateInput
+  }
+
+  export type TeamMemberScalarWhereWithAggregatesInput = {
+    AND?: TeamMemberScalarWhereWithAggregatesInput | TeamMemberScalarWhereWithAggregatesInput[]
+    OR?: TeamMemberScalarWhereWithAggregatesInput[]
+    NOT?: TeamMemberScalarWhereWithAggregatesInput | TeamMemberScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TeamMember"> | number
+    name?: StringWithAggregatesFilter<"TeamMember"> | string
+    email?: StringWithAggregatesFilter<"TeamMember"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TeamMember"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TeamMember"> | Date | string
+    teamId?: IntWithAggregatesFilter<"TeamMember"> | number
+  }
+
   export type ChallengeWhereInput = {
     AND?: ChallengeWhereInput | ChallengeWhereInput[]
     OR?: ChallengeWhereInput[]
@@ -7413,7 +8725,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Challenge"> | Date | string
     competitionId?: IntFilter<"Challenge"> | number
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
-    constraints?: ConstraintListRelationFilter
+    criteria?: CriterionListRelationFilter
     submissions?: SubmissionListRelationFilter
   }
 
@@ -7426,7 +8738,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     competitionId?: SortOrder
     competition?: CompetitionOrderByWithRelationInput
-    constraints?: ConstraintOrderByRelationAggregateInput
+    criteria?: CriterionOrderByRelationAggregateInput
     submissions?: SubmissionOrderByRelationAggregateInput
   }
 
@@ -7442,7 +8754,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Challenge"> | Date | string
     competitionId?: IntFilter<"Challenge"> | number
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
-    constraints?: ConstraintListRelationFilter
+    criteria?: CriterionListRelationFilter
     submissions?: SubmissionListRelationFilter
   }, "id">
 
@@ -7474,21 +8786,21 @@ export namespace Prisma {
     competitionId?: IntWithAggregatesFilter<"Challenge"> | number
   }
 
-  export type ConstraintWhereInput = {
-    AND?: ConstraintWhereInput | ConstraintWhereInput[]
-    OR?: ConstraintWhereInput[]
-    NOT?: ConstraintWhereInput | ConstraintWhereInput[]
-    id?: IntFilter<"Constraint"> | number
-    name?: StringFilter<"Constraint"> | string
-    description?: StringNullableFilter<"Constraint"> | string | null
-    points?: IntFilter<"Constraint"> | number
-    createdAt?: DateTimeFilter<"Constraint"> | Date | string
-    updatedAt?: DateTimeFilter<"Constraint"> | Date | string
-    challengeId?: IntFilter<"Constraint"> | number
+  export type CriterionWhereInput = {
+    AND?: CriterionWhereInput | CriterionWhereInput[]
+    OR?: CriterionWhereInput[]
+    NOT?: CriterionWhereInput | CriterionWhereInput[]
+    id?: IntFilter<"Criterion"> | number
+    name?: StringFilter<"Criterion"> | string
+    description?: StringNullableFilter<"Criterion"> | string | null
+    points?: IntFilter<"Criterion"> | number
+    createdAt?: DateTimeFilter<"Criterion"> | Date | string
+    updatedAt?: DateTimeFilter<"Criterion"> | Date | string
+    challengeId?: IntFilter<"Criterion"> | number
     challenge?: XOR<ChallengeScalarRelationFilter, ChallengeWhereInput>
   }
 
-  export type ConstraintOrderByWithRelationInput = {
+  export type CriterionOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -7499,21 +8811,21 @@ export namespace Prisma {
     challenge?: ChallengeOrderByWithRelationInput
   }
 
-  export type ConstraintWhereUniqueInput = Prisma.AtLeast<{
+  export type CriterionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: ConstraintWhereInput | ConstraintWhereInput[]
-    OR?: ConstraintWhereInput[]
-    NOT?: ConstraintWhereInput | ConstraintWhereInput[]
-    name?: StringFilter<"Constraint"> | string
-    description?: StringNullableFilter<"Constraint"> | string | null
-    points?: IntFilter<"Constraint"> | number
-    createdAt?: DateTimeFilter<"Constraint"> | Date | string
-    updatedAt?: DateTimeFilter<"Constraint"> | Date | string
-    challengeId?: IntFilter<"Constraint"> | number
+    AND?: CriterionWhereInput | CriterionWhereInput[]
+    OR?: CriterionWhereInput[]
+    NOT?: CriterionWhereInput | CriterionWhereInput[]
+    name?: StringFilter<"Criterion"> | string
+    description?: StringNullableFilter<"Criterion"> | string | null
+    points?: IntFilter<"Criterion"> | number
+    createdAt?: DateTimeFilter<"Criterion"> | Date | string
+    updatedAt?: DateTimeFilter<"Criterion"> | Date | string
+    challengeId?: IntFilter<"Criterion"> | number
     challenge?: XOR<ChallengeScalarRelationFilter, ChallengeWhereInput>
   }, "id">
 
-  export type ConstraintOrderByWithAggregationInput = {
+  export type CriterionOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -7521,24 +8833,24 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     challengeId?: SortOrder
-    _count?: ConstraintCountOrderByAggregateInput
-    _avg?: ConstraintAvgOrderByAggregateInput
-    _max?: ConstraintMaxOrderByAggregateInput
-    _min?: ConstraintMinOrderByAggregateInput
-    _sum?: ConstraintSumOrderByAggregateInput
+    _count?: CriterionCountOrderByAggregateInput
+    _avg?: CriterionAvgOrderByAggregateInput
+    _max?: CriterionMaxOrderByAggregateInput
+    _min?: CriterionMinOrderByAggregateInput
+    _sum?: CriterionSumOrderByAggregateInput
   }
 
-  export type ConstraintScalarWhereWithAggregatesInput = {
-    AND?: ConstraintScalarWhereWithAggregatesInput | ConstraintScalarWhereWithAggregatesInput[]
-    OR?: ConstraintScalarWhereWithAggregatesInput[]
-    NOT?: ConstraintScalarWhereWithAggregatesInput | ConstraintScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Constraint"> | number
-    name?: StringWithAggregatesFilter<"Constraint"> | string
-    description?: StringNullableWithAggregatesFilter<"Constraint"> | string | null
-    points?: IntWithAggregatesFilter<"Constraint"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Constraint"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Constraint"> | Date | string
-    challengeId?: IntWithAggregatesFilter<"Constraint"> | number
+  export type CriterionScalarWhereWithAggregatesInput = {
+    AND?: CriterionScalarWhereWithAggregatesInput | CriterionScalarWhereWithAggregatesInput[]
+    OR?: CriterionScalarWhereWithAggregatesInput[]
+    NOT?: CriterionScalarWhereWithAggregatesInput | CriterionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Criterion"> | number
+    name?: StringWithAggregatesFilter<"Criterion"> | string
+    description?: StringNullableWithAggregatesFilter<"Criterion"> | string | null
+    points?: IntWithAggregatesFilter<"Criterion"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Criterion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Criterion"> | Date | string
+    challengeId?: IntWithAggregatesFilter<"Criterion"> | number
   }
 
   export type SubmissionWhereInput = {
@@ -7699,6 +9011,7 @@ export namespace Prisma {
     score?: number
     competition: CompetitionCreateNestedOneWithoutTeamsInput
     submissions?: SubmissionCreateNestedManyWithoutTeamInput
+    members?: TeamMemberCreateNestedManyWithoutTeamInput
   }
 
   export type TeamUncheckedCreateInput = {
@@ -7710,6 +9023,7 @@ export namespace Prisma {
     competitionId: number
     score?: number
     submissions?: SubmissionUncheckedCreateNestedManyWithoutTeamInput
+    members?: TeamMemberUncheckedCreateNestedManyWithoutTeamInput
   }
 
   export type TeamUpdateInput = {
@@ -7720,6 +9034,7 @@ export namespace Prisma {
     score?: IntFieldUpdateOperationsInput | number
     competition?: CompetitionUpdateOneRequiredWithoutTeamsNestedInput
     submissions?: SubmissionUpdateManyWithoutTeamNestedInput
+    members?: TeamMemberUpdateManyWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateInput = {
@@ -7731,6 +9046,7 @@ export namespace Prisma {
     competitionId?: IntFieldUpdateOperationsInput | number
     score?: IntFieldUpdateOperationsInput | number
     submissions?: SubmissionUncheckedUpdateManyWithoutTeamNestedInput
+    members?: TeamMemberUncheckedUpdateManyWithoutTeamNestedInput
   }
 
   export type TeamCreateManyInput = {
@@ -7761,6 +9077,65 @@ export namespace Prisma {
     score?: IntFieldUpdateOperationsInput | number
   }
 
+  export type TeamMemberCreateInput = {
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    team: TeamCreateNestedOneWithoutMembersInput
+  }
+
+  export type TeamMemberUncheckedCreateInput = {
+    id?: number
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamId: number
+  }
+
+  export type TeamMemberUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    team?: TeamUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type TeamMemberUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TeamMemberCreateManyInput = {
+    id?: number
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamId: number
+  }
+
+  export type TeamMemberUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TeamMemberUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type ChallengeCreateInput = {
     name: string
     description?: string | null
@@ -7768,7 +9143,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     competition: CompetitionCreateNestedOneWithoutChallengesInput
-    constraints?: ConstraintCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionCreateNestedManyWithoutChallengeInput
     submissions?: SubmissionCreateNestedManyWithoutChallengeInput
   }
 
@@ -7780,7 +9155,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     competitionId: number
-    constraints?: ConstraintUncheckedCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionUncheckedCreateNestedManyWithoutChallengeInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutChallengeInput
   }
 
@@ -7791,7 +9166,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competition?: CompetitionUpdateOneRequiredWithoutChallengesNestedInput
-    constraints?: ConstraintUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUpdateManyWithoutChallengeNestedInput
     submissions?: SubmissionUpdateManyWithoutChallengeNestedInput
   }
 
@@ -7803,7 +9178,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competitionId?: IntFieldUpdateOperationsInput | number
-    constraints?: ConstraintUncheckedUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUncheckedUpdateManyWithoutChallengeNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutChallengeNestedInput
   }
 
@@ -7835,16 +9210,16 @@ export namespace Prisma {
     competitionId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ConstraintCreateInput = {
+  export type CriterionCreateInput = {
     name: string
     description?: string | null
     points: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    challenge: ChallengeCreateNestedOneWithoutConstraintsInput
+    challenge: ChallengeCreateNestedOneWithoutCriteriaInput
   }
 
-  export type ConstraintUncheckedCreateInput = {
+  export type CriterionUncheckedCreateInput = {
     id?: number
     name: string
     description?: string | null
@@ -7854,16 +9229,16 @@ export namespace Prisma {
     challengeId: number
   }
 
-  export type ConstraintUpdateInput = {
+  export type CriterionUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     points?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    challenge?: ChallengeUpdateOneRequiredWithoutConstraintsNestedInput
+    challenge?: ChallengeUpdateOneRequiredWithoutCriteriaNestedInput
   }
 
-  export type ConstraintUncheckedUpdateInput = {
+  export type CriterionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7873,7 +9248,7 @@ export namespace Prisma {
     challengeId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ConstraintCreateManyInput = {
+  export type CriterionCreateManyInput = {
     id?: number
     name: string
     description?: string | null
@@ -7883,7 +9258,7 @@ export namespace Prisma {
     challengeId: number
   }
 
-  export type ConstraintUpdateManyMutationInput = {
+  export type CriterionUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     points?: IntFieldUpdateOperationsInput | number
@@ -7891,7 +9266,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ConstraintUncheckedUpdateManyInput = {
+  export type CriterionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8161,7 +9536,17 @@ export namespace Prisma {
     none?: SubmissionWhereInput
   }
 
+  export type TeamMemberListRelationFilter = {
+    every?: TeamMemberWhereInput
+    some?: TeamMemberWhereInput
+    none?: TeamMemberWhereInput
+  }
+
   export type SubmissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TeamMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8207,13 +9592,55 @@ export namespace Prisma {
     score?: SortOrder
   }
 
-  export type ConstraintListRelationFilter = {
-    every?: ConstraintWhereInput
-    some?: ConstraintWhereInput
-    none?: ConstraintWhereInput
+  export type TeamScalarRelationFilter = {
+    is?: TeamWhereInput
+    isNot?: TeamWhereInput
   }
 
-  export type ConstraintOrderByRelationAggregateInput = {
+  export type TeamMemberCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    teamId?: SortOrder
+  }
+
+  export type TeamMemberAvgOrderByAggregateInput = {
+    id?: SortOrder
+    teamId?: SortOrder
+  }
+
+  export type TeamMemberMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    teamId?: SortOrder
+  }
+
+  export type TeamMemberMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    teamId?: SortOrder
+  }
+
+  export type TeamMemberSumOrderByAggregateInput = {
+    id?: SortOrder
+    teamId?: SortOrder
+  }
+
+  export type CriterionListRelationFilter = {
+    every?: CriterionWhereInput
+    some?: CriterionWhereInput
+    none?: CriterionWhereInput
+  }
+
+  export type CriterionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8264,7 +9691,7 @@ export namespace Prisma {
     isNot?: ChallengeWhereInput
   }
 
-  export type ConstraintCountOrderByAggregateInput = {
+  export type CriterionCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
@@ -8274,23 +9701,13 @@ export namespace Prisma {
     challengeId?: SortOrder
   }
 
-  export type ConstraintAvgOrderByAggregateInput = {
+  export type CriterionAvgOrderByAggregateInput = {
     id?: SortOrder
     points?: SortOrder
     challengeId?: SortOrder
   }
 
-  export type ConstraintMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    points?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    challengeId?: SortOrder
-  }
-
-  export type ConstraintMinOrderByAggregateInput = {
+  export type CriterionMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
@@ -8300,7 +9717,17 @@ export namespace Prisma {
     challengeId?: SortOrder
   }
 
-  export type ConstraintSumOrderByAggregateInput = {
+  export type CriterionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    challengeId?: SortOrder
+  }
+
+  export type CriterionSumOrderByAggregateInput = {
     id?: SortOrder
     points?: SortOrder
     challengeId?: SortOrder
@@ -8311,11 +9738,6 @@ export namespace Prisma {
     in?: $Enums.SubmissionStatus[]
     notIn?: $Enums.SubmissionStatus[]
     not?: NestedEnumSubmissionStatusFilter<$PrismaModel> | $Enums.SubmissionStatus
-  }
-
-  export type TeamScalarRelationFilter = {
-    is?: TeamWhereInput
-    isNot?: TeamWhereInput
   }
 
   export type SubmissionCountOrderByAggregateInput = {
@@ -8492,11 +9914,25 @@ export namespace Prisma {
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
   }
 
+  export type TeamMemberCreateNestedManyWithoutTeamInput = {
+    create?: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput> | TeamMemberCreateWithoutTeamInput[] | TeamMemberUncheckedCreateWithoutTeamInput[]
+    connectOrCreate?: TeamMemberCreateOrConnectWithoutTeamInput | TeamMemberCreateOrConnectWithoutTeamInput[]
+    createMany?: TeamMemberCreateManyTeamInputEnvelope
+    connect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+  }
+
   export type SubmissionUncheckedCreateNestedManyWithoutTeamInput = {
     create?: XOR<SubmissionCreateWithoutTeamInput, SubmissionUncheckedCreateWithoutTeamInput> | SubmissionCreateWithoutTeamInput[] | SubmissionUncheckedCreateWithoutTeamInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutTeamInput | SubmissionCreateOrConnectWithoutTeamInput[]
     createMany?: SubmissionCreateManyTeamInputEnvelope
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
+  }
+
+  export type TeamMemberUncheckedCreateNestedManyWithoutTeamInput = {
+    create?: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput> | TeamMemberCreateWithoutTeamInput[] | TeamMemberUncheckedCreateWithoutTeamInput[]
+    connectOrCreate?: TeamMemberCreateOrConnectWithoutTeamInput | TeamMemberCreateOrConnectWithoutTeamInput[]
+    createMany?: TeamMemberCreateManyTeamInputEnvelope
+    connect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
   }
 
   export type CompetitionUpdateOneRequiredWithoutTeamsNestedInput = {
@@ -8521,6 +9957,20 @@ export namespace Prisma {
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
   }
 
+  export type TeamMemberUpdateManyWithoutTeamNestedInput = {
+    create?: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput> | TeamMemberCreateWithoutTeamInput[] | TeamMemberUncheckedCreateWithoutTeamInput[]
+    connectOrCreate?: TeamMemberCreateOrConnectWithoutTeamInput | TeamMemberCreateOrConnectWithoutTeamInput[]
+    upsert?: TeamMemberUpsertWithWhereUniqueWithoutTeamInput | TeamMemberUpsertWithWhereUniqueWithoutTeamInput[]
+    createMany?: TeamMemberCreateManyTeamInputEnvelope
+    set?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    disconnect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    delete?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    connect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    update?: TeamMemberUpdateWithWhereUniqueWithoutTeamInput | TeamMemberUpdateWithWhereUniqueWithoutTeamInput[]
+    updateMany?: TeamMemberUpdateManyWithWhereWithoutTeamInput | TeamMemberUpdateManyWithWhereWithoutTeamInput[]
+    deleteMany?: TeamMemberScalarWhereInput | TeamMemberScalarWhereInput[]
+  }
+
   export type SubmissionUncheckedUpdateManyWithoutTeamNestedInput = {
     create?: XOR<SubmissionCreateWithoutTeamInput, SubmissionUncheckedCreateWithoutTeamInput> | SubmissionCreateWithoutTeamInput[] | SubmissionUncheckedCreateWithoutTeamInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutTeamInput | SubmissionCreateOrConnectWithoutTeamInput[]
@@ -8535,17 +9985,45 @@ export namespace Prisma {
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
   }
 
+  export type TeamMemberUncheckedUpdateManyWithoutTeamNestedInput = {
+    create?: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput> | TeamMemberCreateWithoutTeamInput[] | TeamMemberUncheckedCreateWithoutTeamInput[]
+    connectOrCreate?: TeamMemberCreateOrConnectWithoutTeamInput | TeamMemberCreateOrConnectWithoutTeamInput[]
+    upsert?: TeamMemberUpsertWithWhereUniqueWithoutTeamInput | TeamMemberUpsertWithWhereUniqueWithoutTeamInput[]
+    createMany?: TeamMemberCreateManyTeamInputEnvelope
+    set?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    disconnect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    delete?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    connect?: TeamMemberWhereUniqueInput | TeamMemberWhereUniqueInput[]
+    update?: TeamMemberUpdateWithWhereUniqueWithoutTeamInput | TeamMemberUpdateWithWhereUniqueWithoutTeamInput[]
+    updateMany?: TeamMemberUpdateManyWithWhereWithoutTeamInput | TeamMemberUpdateManyWithWhereWithoutTeamInput[]
+    deleteMany?: TeamMemberScalarWhereInput | TeamMemberScalarWhereInput[]
+  }
+
+  export type TeamCreateNestedOneWithoutMembersInput = {
+    create?: XOR<TeamCreateWithoutMembersInput, TeamUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: TeamCreateOrConnectWithoutMembersInput
+    connect?: TeamWhereUniqueInput
+  }
+
+  export type TeamUpdateOneRequiredWithoutMembersNestedInput = {
+    create?: XOR<TeamCreateWithoutMembersInput, TeamUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: TeamCreateOrConnectWithoutMembersInput
+    upsert?: TeamUpsertWithoutMembersInput
+    connect?: TeamWhereUniqueInput
+    update?: XOR<XOR<TeamUpdateToOneWithWhereWithoutMembersInput, TeamUpdateWithoutMembersInput>, TeamUncheckedUpdateWithoutMembersInput>
+  }
+
   export type CompetitionCreateNestedOneWithoutChallengesInput = {
     create?: XOR<CompetitionCreateWithoutChallengesInput, CompetitionUncheckedCreateWithoutChallengesInput>
     connectOrCreate?: CompetitionCreateOrConnectWithoutChallengesInput
     connect?: CompetitionWhereUniqueInput
   }
 
-  export type ConstraintCreateNestedManyWithoutChallengeInput = {
-    create?: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput> | ConstraintCreateWithoutChallengeInput[] | ConstraintUncheckedCreateWithoutChallengeInput[]
-    connectOrCreate?: ConstraintCreateOrConnectWithoutChallengeInput | ConstraintCreateOrConnectWithoutChallengeInput[]
-    createMany?: ConstraintCreateManyChallengeInputEnvelope
-    connect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
+  export type CriterionCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput> | CriterionCreateWithoutChallengeInput[] | CriterionUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: CriterionCreateOrConnectWithoutChallengeInput | CriterionCreateOrConnectWithoutChallengeInput[]
+    createMany?: CriterionCreateManyChallengeInputEnvelope
+    connect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
   }
 
   export type SubmissionCreateNestedManyWithoutChallengeInput = {
@@ -8555,11 +10033,11 @@ export namespace Prisma {
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
   }
 
-  export type ConstraintUncheckedCreateNestedManyWithoutChallengeInput = {
-    create?: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput> | ConstraintCreateWithoutChallengeInput[] | ConstraintUncheckedCreateWithoutChallengeInput[]
-    connectOrCreate?: ConstraintCreateOrConnectWithoutChallengeInput | ConstraintCreateOrConnectWithoutChallengeInput[]
-    createMany?: ConstraintCreateManyChallengeInputEnvelope
-    connect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
+  export type CriterionUncheckedCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput> | CriterionCreateWithoutChallengeInput[] | CriterionUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: CriterionCreateOrConnectWithoutChallengeInput | CriterionCreateOrConnectWithoutChallengeInput[]
+    createMany?: CriterionCreateManyChallengeInputEnvelope
+    connect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
   }
 
   export type SubmissionUncheckedCreateNestedManyWithoutChallengeInput = {
@@ -8577,18 +10055,18 @@ export namespace Prisma {
     update?: XOR<XOR<CompetitionUpdateToOneWithWhereWithoutChallengesInput, CompetitionUpdateWithoutChallengesInput>, CompetitionUncheckedUpdateWithoutChallengesInput>
   }
 
-  export type ConstraintUpdateManyWithoutChallengeNestedInput = {
-    create?: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput> | ConstraintCreateWithoutChallengeInput[] | ConstraintUncheckedCreateWithoutChallengeInput[]
-    connectOrCreate?: ConstraintCreateOrConnectWithoutChallengeInput | ConstraintCreateOrConnectWithoutChallengeInput[]
-    upsert?: ConstraintUpsertWithWhereUniqueWithoutChallengeInput | ConstraintUpsertWithWhereUniqueWithoutChallengeInput[]
-    createMany?: ConstraintCreateManyChallengeInputEnvelope
-    set?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    disconnect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    delete?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    connect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    update?: ConstraintUpdateWithWhereUniqueWithoutChallengeInput | ConstraintUpdateWithWhereUniqueWithoutChallengeInput[]
-    updateMany?: ConstraintUpdateManyWithWhereWithoutChallengeInput | ConstraintUpdateManyWithWhereWithoutChallengeInput[]
-    deleteMany?: ConstraintScalarWhereInput | ConstraintScalarWhereInput[]
+  export type CriterionUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput> | CriterionCreateWithoutChallengeInput[] | CriterionUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: CriterionCreateOrConnectWithoutChallengeInput | CriterionCreateOrConnectWithoutChallengeInput[]
+    upsert?: CriterionUpsertWithWhereUniqueWithoutChallengeInput | CriterionUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: CriterionCreateManyChallengeInputEnvelope
+    set?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    disconnect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    delete?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    connect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    update?: CriterionUpdateWithWhereUniqueWithoutChallengeInput | CriterionUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: CriterionUpdateManyWithWhereWithoutChallengeInput | CriterionUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: CriterionScalarWhereInput | CriterionScalarWhereInput[]
   }
 
   export type SubmissionUpdateManyWithoutChallengeNestedInput = {
@@ -8605,18 +10083,18 @@ export namespace Prisma {
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
   }
 
-  export type ConstraintUncheckedUpdateManyWithoutChallengeNestedInput = {
-    create?: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput> | ConstraintCreateWithoutChallengeInput[] | ConstraintUncheckedCreateWithoutChallengeInput[]
-    connectOrCreate?: ConstraintCreateOrConnectWithoutChallengeInput | ConstraintCreateOrConnectWithoutChallengeInput[]
-    upsert?: ConstraintUpsertWithWhereUniqueWithoutChallengeInput | ConstraintUpsertWithWhereUniqueWithoutChallengeInput[]
-    createMany?: ConstraintCreateManyChallengeInputEnvelope
-    set?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    disconnect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    delete?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    connect?: ConstraintWhereUniqueInput | ConstraintWhereUniqueInput[]
-    update?: ConstraintUpdateWithWhereUniqueWithoutChallengeInput | ConstraintUpdateWithWhereUniqueWithoutChallengeInput[]
-    updateMany?: ConstraintUpdateManyWithWhereWithoutChallengeInput | ConstraintUpdateManyWithWhereWithoutChallengeInput[]
-    deleteMany?: ConstraintScalarWhereInput | ConstraintScalarWhereInput[]
+  export type CriterionUncheckedUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput> | CriterionCreateWithoutChallengeInput[] | CriterionUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: CriterionCreateOrConnectWithoutChallengeInput | CriterionCreateOrConnectWithoutChallengeInput[]
+    upsert?: CriterionUpsertWithWhereUniqueWithoutChallengeInput | CriterionUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: CriterionCreateManyChallengeInputEnvelope
+    set?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    disconnect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    delete?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    connect?: CriterionWhereUniqueInput | CriterionWhereUniqueInput[]
+    update?: CriterionUpdateWithWhereUniqueWithoutChallengeInput | CriterionUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: CriterionUpdateManyWithWhereWithoutChallengeInput | CriterionUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: CriterionScalarWhereInput | CriterionScalarWhereInput[]
   }
 
   export type SubmissionUncheckedUpdateManyWithoutChallengeNestedInput = {
@@ -8633,18 +10111,18 @@ export namespace Prisma {
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
   }
 
-  export type ChallengeCreateNestedOneWithoutConstraintsInput = {
-    create?: XOR<ChallengeCreateWithoutConstraintsInput, ChallengeUncheckedCreateWithoutConstraintsInput>
-    connectOrCreate?: ChallengeCreateOrConnectWithoutConstraintsInput
+  export type ChallengeCreateNestedOneWithoutCriteriaInput = {
+    create?: XOR<ChallengeCreateWithoutCriteriaInput, ChallengeUncheckedCreateWithoutCriteriaInput>
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCriteriaInput
     connect?: ChallengeWhereUniqueInput
   }
 
-  export type ChallengeUpdateOneRequiredWithoutConstraintsNestedInput = {
-    create?: XOR<ChallengeCreateWithoutConstraintsInput, ChallengeUncheckedCreateWithoutConstraintsInput>
-    connectOrCreate?: ChallengeCreateOrConnectWithoutConstraintsInput
-    upsert?: ChallengeUpsertWithoutConstraintsInput
+  export type ChallengeUpdateOneRequiredWithoutCriteriaNestedInput = {
+    create?: XOR<ChallengeCreateWithoutCriteriaInput, ChallengeUncheckedCreateWithoutCriteriaInput>
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCriteriaInput
+    upsert?: ChallengeUpsertWithoutCriteriaInput
     connect?: ChallengeWhereUniqueInput
-    update?: XOR<XOR<ChallengeUpdateToOneWithWhereWithoutConstraintsInput, ChallengeUpdateWithoutConstraintsInput>, ChallengeUncheckedUpdateWithoutConstraintsInput>
+    update?: XOR<XOR<ChallengeUpdateToOneWithWhereWithoutCriteriaInput, ChallengeUpdateWithoutCriteriaInput>, ChallengeUncheckedUpdateWithoutCriteriaInput>
   }
 
   export type TeamCreateNestedOneWithoutSubmissionsInput = {
@@ -8839,6 +10317,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     score?: number
     submissions?: SubmissionCreateNestedManyWithoutTeamInput
+    members?: TeamMemberCreateNestedManyWithoutTeamInput
   }
 
   export type TeamUncheckedCreateWithoutCompetitionInput = {
@@ -8849,6 +10328,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     score?: number
     submissions?: SubmissionUncheckedCreateNestedManyWithoutTeamInput
+    members?: TeamMemberUncheckedCreateNestedManyWithoutTeamInput
   }
 
   export type TeamCreateOrConnectWithoutCompetitionInput = {
@@ -8866,7 +10346,7 @@ export namespace Prisma {
     totalPoints: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    constraints?: ConstraintCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionCreateNestedManyWithoutChallengeInput
     submissions?: SubmissionCreateNestedManyWithoutChallengeInput
   }
 
@@ -8877,7 +10357,7 @@ export namespace Prisma {
     totalPoints: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    constraints?: ConstraintUncheckedCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionUncheckedCreateNestedManyWithoutChallengeInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutChallengeInput
   }
 
@@ -9002,6 +10482,30 @@ export namespace Prisma {
     data: SubmissionCreateManyTeamInput | SubmissionCreateManyTeamInput[]
   }
 
+  export type TeamMemberCreateWithoutTeamInput = {
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TeamMemberUncheckedCreateWithoutTeamInput = {
+    id?: number
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TeamMemberCreateOrConnectWithoutTeamInput = {
+    where: TeamMemberWhereUniqueInput
+    create: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput>
+  }
+
+  export type TeamMemberCreateManyTeamInputEnvelope = {
+    data: TeamMemberCreateManyTeamInput | TeamMemberCreateManyTeamInput[]
+  }
+
   export type CompetitionUpsertWithoutTeamsInput = {
     update: XOR<CompetitionUpdateWithoutTeamsInput, CompetitionUncheckedUpdateWithoutTeamsInput>
     create: XOR<CompetitionCreateWithoutTeamsInput, CompetitionUncheckedCreateWithoutTeamsInput>
@@ -9064,6 +10568,92 @@ export namespace Prisma {
     score?: IntFilter<"Submission"> | number
   }
 
+  export type TeamMemberUpsertWithWhereUniqueWithoutTeamInput = {
+    where: TeamMemberWhereUniqueInput
+    update: XOR<TeamMemberUpdateWithoutTeamInput, TeamMemberUncheckedUpdateWithoutTeamInput>
+    create: XOR<TeamMemberCreateWithoutTeamInput, TeamMemberUncheckedCreateWithoutTeamInput>
+  }
+
+  export type TeamMemberUpdateWithWhereUniqueWithoutTeamInput = {
+    where: TeamMemberWhereUniqueInput
+    data: XOR<TeamMemberUpdateWithoutTeamInput, TeamMemberUncheckedUpdateWithoutTeamInput>
+  }
+
+  export type TeamMemberUpdateManyWithWhereWithoutTeamInput = {
+    where: TeamMemberScalarWhereInput
+    data: XOR<TeamMemberUpdateManyMutationInput, TeamMemberUncheckedUpdateManyWithoutTeamInput>
+  }
+
+  export type TeamMemberScalarWhereInput = {
+    AND?: TeamMemberScalarWhereInput | TeamMemberScalarWhereInput[]
+    OR?: TeamMemberScalarWhereInput[]
+    NOT?: TeamMemberScalarWhereInput | TeamMemberScalarWhereInput[]
+    id?: IntFilter<"TeamMember"> | number
+    name?: StringFilter<"TeamMember"> | string
+    email?: StringFilter<"TeamMember"> | string
+    createdAt?: DateTimeFilter<"TeamMember"> | Date | string
+    updatedAt?: DateTimeFilter<"TeamMember"> | Date | string
+    teamId?: IntFilter<"TeamMember"> | number
+  }
+
+  export type TeamCreateWithoutMembersInput = {
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    score?: number
+    competition: CompetitionCreateNestedOneWithoutTeamsInput
+    submissions?: SubmissionCreateNestedManyWithoutTeamInput
+  }
+
+  export type TeamUncheckedCreateWithoutMembersInput = {
+    id?: number
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    competitionId: number
+    score?: number
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutTeamInput
+  }
+
+  export type TeamCreateOrConnectWithoutMembersInput = {
+    where: TeamWhereUniqueInput
+    create: XOR<TeamCreateWithoutMembersInput, TeamUncheckedCreateWithoutMembersInput>
+  }
+
+  export type TeamUpsertWithoutMembersInput = {
+    update: XOR<TeamUpdateWithoutMembersInput, TeamUncheckedUpdateWithoutMembersInput>
+    create: XOR<TeamCreateWithoutMembersInput, TeamUncheckedCreateWithoutMembersInput>
+    where?: TeamWhereInput
+  }
+
+  export type TeamUpdateToOneWithWhereWithoutMembersInput = {
+    where?: TeamWhereInput
+    data: XOR<TeamUpdateWithoutMembersInput, TeamUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type TeamUpdateWithoutMembersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    competition?: CompetitionUpdateOneRequiredWithoutTeamsNestedInput
+    submissions?: SubmissionUpdateManyWithoutTeamNestedInput
+  }
+
+  export type TeamUncheckedUpdateWithoutMembersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    competitionId?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    submissions?: SubmissionUncheckedUpdateManyWithoutTeamNestedInput
+  }
+
   export type CompetitionCreateWithoutChallengesInput = {
     name: string
     description?: string | null
@@ -9090,7 +10680,7 @@ export namespace Prisma {
     create: XOR<CompetitionCreateWithoutChallengesInput, CompetitionUncheckedCreateWithoutChallengesInput>
   }
 
-  export type ConstraintCreateWithoutChallengeInput = {
+  export type CriterionCreateWithoutChallengeInput = {
     name: string
     description?: string | null
     points: number
@@ -9098,7 +10688,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ConstraintUncheckedCreateWithoutChallengeInput = {
+  export type CriterionUncheckedCreateWithoutChallengeInput = {
     id?: number
     name: string
     description?: string | null
@@ -9107,13 +10697,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ConstraintCreateOrConnectWithoutChallengeInput = {
-    where: ConstraintWhereUniqueInput
-    create: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput>
+  export type CriterionCreateOrConnectWithoutChallengeInput = {
+    where: CriterionWhereUniqueInput
+    create: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput>
   }
 
-  export type ConstraintCreateManyChallengeInputEnvelope = {
-    data: ConstraintCreateManyChallengeInput | ConstraintCreateManyChallengeInput[]
+  export type CriterionCreateManyChallengeInputEnvelope = {
+    data: CriterionCreateManyChallengeInput | CriterionCreateManyChallengeInput[]
   }
 
   export type SubmissionCreateWithoutChallengeInput = {
@@ -9176,33 +10766,33 @@ export namespace Prisma {
     teams?: TeamUncheckedUpdateManyWithoutCompetitionNestedInput
   }
 
-  export type ConstraintUpsertWithWhereUniqueWithoutChallengeInput = {
-    where: ConstraintWhereUniqueInput
-    update: XOR<ConstraintUpdateWithoutChallengeInput, ConstraintUncheckedUpdateWithoutChallengeInput>
-    create: XOR<ConstraintCreateWithoutChallengeInput, ConstraintUncheckedCreateWithoutChallengeInput>
+  export type CriterionUpsertWithWhereUniqueWithoutChallengeInput = {
+    where: CriterionWhereUniqueInput
+    update: XOR<CriterionUpdateWithoutChallengeInput, CriterionUncheckedUpdateWithoutChallengeInput>
+    create: XOR<CriterionCreateWithoutChallengeInput, CriterionUncheckedCreateWithoutChallengeInput>
   }
 
-  export type ConstraintUpdateWithWhereUniqueWithoutChallengeInput = {
-    where: ConstraintWhereUniqueInput
-    data: XOR<ConstraintUpdateWithoutChallengeInput, ConstraintUncheckedUpdateWithoutChallengeInput>
+  export type CriterionUpdateWithWhereUniqueWithoutChallengeInput = {
+    where: CriterionWhereUniqueInput
+    data: XOR<CriterionUpdateWithoutChallengeInput, CriterionUncheckedUpdateWithoutChallengeInput>
   }
 
-  export type ConstraintUpdateManyWithWhereWithoutChallengeInput = {
-    where: ConstraintScalarWhereInput
-    data: XOR<ConstraintUpdateManyMutationInput, ConstraintUncheckedUpdateManyWithoutChallengeInput>
+  export type CriterionUpdateManyWithWhereWithoutChallengeInput = {
+    where: CriterionScalarWhereInput
+    data: XOR<CriterionUpdateManyMutationInput, CriterionUncheckedUpdateManyWithoutChallengeInput>
   }
 
-  export type ConstraintScalarWhereInput = {
-    AND?: ConstraintScalarWhereInput | ConstraintScalarWhereInput[]
-    OR?: ConstraintScalarWhereInput[]
-    NOT?: ConstraintScalarWhereInput | ConstraintScalarWhereInput[]
-    id?: IntFilter<"Constraint"> | number
-    name?: StringFilter<"Constraint"> | string
-    description?: StringNullableFilter<"Constraint"> | string | null
-    points?: IntFilter<"Constraint"> | number
-    createdAt?: DateTimeFilter<"Constraint"> | Date | string
-    updatedAt?: DateTimeFilter<"Constraint"> | Date | string
-    challengeId?: IntFilter<"Constraint"> | number
+  export type CriterionScalarWhereInput = {
+    AND?: CriterionScalarWhereInput | CriterionScalarWhereInput[]
+    OR?: CriterionScalarWhereInput[]
+    NOT?: CriterionScalarWhereInput | CriterionScalarWhereInput[]
+    id?: IntFilter<"Criterion"> | number
+    name?: StringFilter<"Criterion"> | string
+    description?: StringNullableFilter<"Criterion"> | string | null
+    points?: IntFilter<"Criterion"> | number
+    createdAt?: DateTimeFilter<"Criterion"> | Date | string
+    updatedAt?: DateTimeFilter<"Criterion"> | Date | string
+    challengeId?: IntFilter<"Criterion"> | number
   }
 
   export type SubmissionUpsertWithWhereUniqueWithoutChallengeInput = {
@@ -9221,7 +10811,7 @@ export namespace Prisma {
     data: XOR<SubmissionUpdateManyMutationInput, SubmissionUncheckedUpdateManyWithoutChallengeInput>
   }
 
-  export type ChallengeCreateWithoutConstraintsInput = {
+  export type ChallengeCreateWithoutCriteriaInput = {
     name: string
     description?: string | null
     totalPoints: number
@@ -9231,7 +10821,7 @@ export namespace Prisma {
     submissions?: SubmissionCreateNestedManyWithoutChallengeInput
   }
 
-  export type ChallengeUncheckedCreateWithoutConstraintsInput = {
+  export type ChallengeUncheckedCreateWithoutCriteriaInput = {
     id?: number
     name: string
     description?: string | null
@@ -9242,23 +10832,23 @@ export namespace Prisma {
     submissions?: SubmissionUncheckedCreateNestedManyWithoutChallengeInput
   }
 
-  export type ChallengeCreateOrConnectWithoutConstraintsInput = {
+  export type ChallengeCreateOrConnectWithoutCriteriaInput = {
     where: ChallengeWhereUniqueInput
-    create: XOR<ChallengeCreateWithoutConstraintsInput, ChallengeUncheckedCreateWithoutConstraintsInput>
+    create: XOR<ChallengeCreateWithoutCriteriaInput, ChallengeUncheckedCreateWithoutCriteriaInput>
   }
 
-  export type ChallengeUpsertWithoutConstraintsInput = {
-    update: XOR<ChallengeUpdateWithoutConstraintsInput, ChallengeUncheckedUpdateWithoutConstraintsInput>
-    create: XOR<ChallengeCreateWithoutConstraintsInput, ChallengeUncheckedCreateWithoutConstraintsInput>
+  export type ChallengeUpsertWithoutCriteriaInput = {
+    update: XOR<ChallengeUpdateWithoutCriteriaInput, ChallengeUncheckedUpdateWithoutCriteriaInput>
+    create: XOR<ChallengeCreateWithoutCriteriaInput, ChallengeUncheckedCreateWithoutCriteriaInput>
     where?: ChallengeWhereInput
   }
 
-  export type ChallengeUpdateToOneWithWhereWithoutConstraintsInput = {
+  export type ChallengeUpdateToOneWithWhereWithoutCriteriaInput = {
     where?: ChallengeWhereInput
-    data: XOR<ChallengeUpdateWithoutConstraintsInput, ChallengeUncheckedUpdateWithoutConstraintsInput>
+    data: XOR<ChallengeUpdateWithoutCriteriaInput, ChallengeUncheckedUpdateWithoutCriteriaInput>
   }
 
-  export type ChallengeUpdateWithoutConstraintsInput = {
+  export type ChallengeUpdateWithoutCriteriaInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     totalPoints?: IntFieldUpdateOperationsInput | number
@@ -9268,7 +10858,7 @@ export namespace Prisma {
     submissions?: SubmissionUpdateManyWithoutChallengeNestedInput
   }
 
-  export type ChallengeUncheckedUpdateWithoutConstraintsInput = {
+  export type ChallengeUncheckedUpdateWithoutCriteriaInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9286,6 +10876,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     score?: number
     competition: CompetitionCreateNestedOneWithoutTeamsInput
+    members?: TeamMemberCreateNestedManyWithoutTeamInput
   }
 
   export type TeamUncheckedCreateWithoutSubmissionsInput = {
@@ -9296,6 +10887,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     competitionId: number
     score?: number
+    members?: TeamMemberUncheckedCreateNestedManyWithoutTeamInput
   }
 
   export type TeamCreateOrConnectWithoutSubmissionsInput = {
@@ -9310,7 +10902,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     competition: CompetitionCreateNestedOneWithoutChallengesInput
-    constraints?: ConstraintCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionCreateNestedManyWithoutChallengeInput
   }
 
   export type ChallengeUncheckedCreateWithoutSubmissionsInput = {
@@ -9321,7 +10913,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     competitionId: number
-    constraints?: ConstraintUncheckedCreateNestedManyWithoutChallengeInput
+    criteria?: CriterionUncheckedCreateNestedManyWithoutChallengeInput
   }
 
   export type ChallengeCreateOrConnectWithoutSubmissionsInput = {
@@ -9347,6 +10939,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     score?: IntFieldUpdateOperationsInput | number
     competition?: CompetitionUpdateOneRequiredWithoutTeamsNestedInput
+    members?: TeamMemberUpdateManyWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateWithoutSubmissionsInput = {
@@ -9357,6 +10950,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competitionId?: IntFieldUpdateOperationsInput | number
     score?: IntFieldUpdateOperationsInput | number
+    members?: TeamMemberUncheckedUpdateManyWithoutTeamNestedInput
   }
 
   export type ChallengeUpsertWithoutSubmissionsInput = {
@@ -9377,7 +10971,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competition?: CompetitionUpdateOneRequiredWithoutChallengesNestedInput
-    constraints?: ConstraintUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUpdateManyWithoutChallengeNestedInput
   }
 
   export type ChallengeUncheckedUpdateWithoutSubmissionsInput = {
@@ -9388,7 +10982,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competitionId?: IntFieldUpdateOperationsInput | number
-    constraints?: ConstraintUncheckedUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUncheckedUpdateManyWithoutChallengeNestedInput
   }
 
   export type TeamCreateManyCompetitionInput = {
@@ -9416,6 +11010,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     score?: IntFieldUpdateOperationsInput | number
     submissions?: SubmissionUpdateManyWithoutTeamNestedInput
+    members?: TeamMemberUpdateManyWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateWithoutCompetitionInput = {
@@ -9426,6 +11021,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     score?: IntFieldUpdateOperationsInput | number
     submissions?: SubmissionUncheckedUpdateManyWithoutTeamNestedInput
+    members?: TeamMemberUncheckedUpdateManyWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateManyWithoutCompetitionInput = {
@@ -9443,7 +11039,7 @@ export namespace Prisma {
     totalPoints?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    constraints?: ConstraintUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUpdateManyWithoutChallengeNestedInput
     submissions?: SubmissionUpdateManyWithoutChallengeNestedInput
   }
 
@@ -9454,7 +11050,7 @@ export namespace Prisma {
     totalPoints?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    constraints?: ConstraintUncheckedUpdateManyWithoutChallengeNestedInput
+    criteria?: CriterionUncheckedUpdateManyWithoutChallengeNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutChallengeNestedInput
   }
 
@@ -9475,6 +11071,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     score?: number
+  }
+
+  export type TeamMemberCreateManyTeamInput = {
+    id?: number
+    name: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SubmissionUpdateWithoutTeamInput = {
@@ -9506,7 +11110,30 @@ export namespace Prisma {
     score?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ConstraintCreateManyChallengeInput = {
+  export type TeamMemberUpdateWithoutTeamInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TeamMemberUncheckedUpdateWithoutTeamInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TeamMemberUncheckedUpdateManyWithoutTeamInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CriterionCreateManyChallengeInput = {
     id?: number
     name: string
     description?: string | null
@@ -9525,7 +11152,7 @@ export namespace Prisma {
     score?: number
   }
 
-  export type ConstraintUpdateWithoutChallengeInput = {
+  export type CriterionUpdateWithoutChallengeInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     points?: IntFieldUpdateOperationsInput | number
@@ -9533,7 +11160,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ConstraintUncheckedUpdateWithoutChallengeInput = {
+  export type CriterionUncheckedUpdateWithoutChallengeInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9542,7 +11169,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ConstraintUncheckedUpdateManyWithoutChallengeInput = {
+  export type CriterionUncheckedUpdateManyWithoutChallengeInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null

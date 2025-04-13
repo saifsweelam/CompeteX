@@ -33,6 +33,17 @@ model Team {
   competitionId Int
   score         Int          @default(0)
   submissions   Submission[]
+  members       TeamMember[]
+}
+
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    Int
 }
 
 model Challenge {
@@ -44,11 +55,11 @@ model Challenge {
   updatedAt     DateTime     @updatedAt
   competition   Competition  @relation(fields: [competitionId], references: [id])
   competitionId Int
-  constraints   Constraint[]
+  criteria      Criterion[]
   submissions   Submission[]
 }
 
-model Constraint {
+model Criterion {
   id          Int       @id @default(autoincrement())
   name        String
   description String?
