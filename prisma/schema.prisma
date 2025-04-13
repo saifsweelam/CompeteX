@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Competition {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  teams       Team[]
+  challenges  Challenge[]
+}
+
+model Team {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  competition   Competition  @relation(fields: [competitionId], references: [id])
+  competitionId Int
+  score         Int          @default(0)
+  submissions   Submission[]
+}
+
+model Challenge {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String?
+  totalPoints   Int
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  competition   Competition  @relation(fields: [competitionId], references: [id])
+  competitionId Int
+  constraints   Constraint[]
+  submissions   Submission[]
+}
+
+model Constraint {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  points      Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+}
+
+enum SubmissionStatus {
+  PENDING
+  JUDGED
+}
+
+model Submission {
+  id          Int              @id @default(autoincrement())
+  team        Team             @relation(fields: [teamId], references: [id])
+  teamId      Int
+  challenge   Challenge        @relation(fields: [challengeId], references: [id])
+  challengeId Int
+  content     String
+  status      SubmissionStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  score       Int              @default(0)
+}
