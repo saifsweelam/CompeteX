@@ -1,4 +1,4 @@
-import prisma from "../../../lib/db";
+import prisma from "../../lib/db";
 import { GetCompetitionsQuery } from "./dto/GetCompetitionsQuery";
 
 export default class CompetitionsService {

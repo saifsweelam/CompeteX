@@ -1,7 +1,7 @@
 import { Router } from "express";
-import CompetitionsService from "./competitions.service";
+import CompetitionsService from "../competitions.service";
 import validate from "../../../middlewares/validate.middleware";
-import { getCompetitionsQuerySchema } from "./dto/GetCompetitionsQuery";
+import { getCompetitionsQuerySchema } from "../dto/GetCompetitionsQuery";
 import { idParamSchema } from "../../../schemas/id.schema";
 
 const router = Router();
@@ -25,7 +25,4 @@ router.get(
     }
 );
 
-export default {
-    router,
-    prefix: "/competitions",
-}
+export default router;

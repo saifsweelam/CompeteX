@@ -1,7 +1,7 @@
 import { Router } from "express";
 import validate from "../../../middlewares/validate.middleware";
-import { createTeamBodySchema } from "./dto/CreateTeamBody";
-import TeamsService from "./teams.service";
+import { createTeamBodySchema } from "../../teams/dto/CreateTeamBody";
+import TeamsService from "../teams.service";
 
 const router = Router();
 const teamsService = new TeamsService();
@@ -15,7 +15,4 @@ router.post(
     }
 )
 
-export default {
-    router,
-    prefix: "/teams",
-}
+export default router;

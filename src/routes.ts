@@ -1,11 +1,8 @@
 import { Express } from "express";
-import competitorRoute from "./modules/competitor/competitor.route";
-import publicRoute from "./modules/public/public.route";
+import { registerCompetitionsRoutes } from "./modules/competitions";
+import { registerTeamsRoutes } from "./modules/teams";
 
 export default function routes(app: Express) {
-    // Public/Anonymous Router
-    app.use(publicRoute.prefix, publicRoute.router);
-
-    // Competitor Main Router
-    app.use(competitorRoute.prefix, competitorRoute.router);
+    registerCompetitionsRoutes(app);
+    registerTeamsRoutes(app);
 };

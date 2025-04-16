@@ -1,0 +1,1 @@
+export { default as competitionsPublicRouter } from './competitions.public.route';

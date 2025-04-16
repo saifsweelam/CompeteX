@@ -1,0 +1,1 @@
+export { default as teamsPublicRouter } from './teams.public.route';

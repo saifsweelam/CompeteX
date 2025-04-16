@@ -1,5 +1,5 @@
 import { z } from "zod";
-import env from "../../../../env";
+import env from "../../../env";
 
 export const createTeamBodySchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),

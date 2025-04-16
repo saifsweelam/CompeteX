@@ -1,5 +1,5 @@
-import ApiError from "../../../errors/api.error";
-import prisma from "../../../lib/db";
+import ApiError from "../../errors/api.error";
+import prisma from "../../lib/db";
 import { CreateTeamBody } from "./dto/CreateTeamBody";
 
 export default class TeamsService {
